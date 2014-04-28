@@ -1,0 +1,469 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN" "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<node><interface name="com.bluegiga.v2.bt.hfg">
+	<signal name="DeactivateCfm">
+	</signal>
+
+	<signal name="ServiceConnectInd">
+		<arg name="connectionId" type="u" /> <!--  connection index  -->
+		<arg name="connectionType" type="y" /> <!--  connection is either AG or HFG  -->
+		<arg name="serviceName" type="s" /> <!-- ,  name of HFG service (not friendly name)  -->
+		<arg name="deviceAddr" type="s" /> <!-- Bluetooth device address,  address of device connected  -->
+		<arg name="supportedFeatures" type="u" /> <!-- uint32,  features registered at peer side  -->
+		<arg name="remoteVersion" type="q" /> <!-- uint16,  remote device's supported version of the spec  -->
+		<arg name="resultCode" type="q" />
+		<arg name="resultSupplier" type="q" />
+		<arg name="btConnId" type="u" /> <!--  Global Bluetooth connection ID  -->
+	</signal>
+
+	<signal name="DisconnectInd">
+		<arg name="connectionId" type="u" /> <!--  connection index  -->
+		<arg name="reasonCode" type="q" />
+		<arg name="reasonSupplier" type="q" />
+		<arg name="localTerminated" type="b" /> <!-- boolean -->
+		<arg name="deviceAddr" type="s" /> <!-- Bluetooth device address,  address of disconnected device  -->
+	</signal>
+
+	<signal name="AudioConnectInd">
+		<arg name="connectionId" type="u" /> <!--  connection index  -->
+		<arg name="scoHandle" type="q" /> <!-- uint16,  sco handle if routed internally  -->
+		<arg name="pcmSlot" type="y" /> <!-- uint8,  chosen PCM slot  -->
+		<arg name="linkType" type="y" /> <!-- uint8,  Link type used in the established audio connection (0x00 = SCO, 0x02 = eSCO) -->
+		<arg name="txInterval" type="y" /> <!-- uint8,  Transmission interval in baseband slots (Set to zero for SCO links)  -->
+		<arg name="weSco" type="y" /> <!-- uint8,  Retransmission window in baseband slots (Set to zero for SCO links)  -->
+		<arg name="rxPacketLength" type="q" /> <!-- uint16,  RX packet length in bytes for eSCO connections (Set to zero for SCO links)  -->
+		<arg name="txPacketLength" type="q" /> <!-- uint16,  TX packet length in bytes for eSCO connections (Set to zero for SCO links)  -->
+		<arg name="airMode" type="y" /> <!-- uint8,  Air mode (0x00 = my-law, 0x01 = A-law, 0x02 = CVSD, 0x03 = Transparent data)  -->
+		<arg name="codecUsed" type="y" /> <!--  Codec used for the audio connection established  -->
+		<arg name="sampleRate" type="y" /> <!--  Sample rate used for the audio connection established  -->
+		<arg name="resultCode" type="q" />
+		<arg name="resultSupplier" type="q" />
+	</signal>
+
+	<signal name="AudioConnectCfm">
+		<arg name="connectionId" type="u" /> <!--  connection index  -->
+		<arg name="scoHandle" type="q" /> <!-- uint16,  sco handle if routed internally  -->
+		<arg name="pcmSlot" type="y" /> <!-- uint8,  chosen PCM slot  -->
+		<arg name="linkType" type="y" /> <!-- uint8,  Link type used in the established audio connection (0x00 = SCO, 0x02 = eSCO) -->
+		<arg name="txInterval" type="y" /> <!-- uint8,  Transmission interval in baseband slots (Set to zero for SCO links)  -->
+		<arg name="weSco" type="y" /> <!-- uint8,  Retransmission window in baseband slots (Set to zero for SCO links)  -->
+		<arg name="rxPacketLength" type="q" /> <!-- uint16,  RX packet length in bytes for eSCO connections (Set to zero for SCO links)  -->
+		<arg name="txPacketLength" type="q" /> <!-- uint16,  TX packet length in bytes for eSCO connections (Set to zero for SCO links)  -->
+		<arg name="airMode" type="y" /> <!-- uint8,  Air mode (0x00 = my-law, 0x01 = A-law, 0x02 = CVSD, 0x03 = Transparent data)  -->
+		<arg name="codecUsed" type="y" /> <!--  Codec used for the audio connection established  -->
+		<arg name="sampleRate" type="y" /> <!--  Sample rate used for the audio connection established  -->
+		<arg name="resultCode" type="q" />
+		<arg name="resultSupplier" type="q" />
+	</signal>
+
+	<signal name="AudioAcceptConnectInd">
+		<arg name="connectionId" type="u" /> <!--  Connection indentifier  -->
+		<arg name="linkType" type="y" /> <!-- uint8,  specifies SCO/eSCO  -->
+	</signal>
+
+	<signal name="AudioDisconnectCfm">
+		<arg name="connectionId" type="u" /> <!--  Connection indentifier  -->
+		<arg name="scoHandle" type="q" /> <!-- uint16,  sco handle if routed internally  -->
+		<arg name="resultCode" type="q" />
+		<arg name="resultSupplier" type="q" />
+	</signal>
+
+	<signal name="AudioDisconnectInd">
+		<arg name="connectionId" type="u" /> <!--  Connection indentifier  -->
+		<arg name="scoHandle" type="q" /> <!-- uint16,  sco handle if routed internally  -->
+		<arg name="reasonCode" type="q" />
+		<arg name="reasonSupplier" type="q" />
+	</signal>
+
+	<signal name="SecurityInCfm">
+		<arg name="resultCode" type="q" />
+		<arg name="resultSupplier" type="q" />
+	</signal>
+
+	<signal name="SecurityOutCfm">
+		<arg name="resultCode" type="q" />
+		<arg name="resultSupplier" type="q" />
+	</signal>
+
+	<signal name="StatusLpInd">
+		<arg name="connectionId" type="u" /> <!--  connection index  -->
+		<arg name="currentMode" type="y" /> <!-- uint8,  current low-power mode  -->
+		<arg name="oldMode" type="y" /> <!-- uint8,  old LP mode  -->
+		<arg name="wantedMode" type="y" /> <!-- uint8,  wanted LP mode  -->
+		<arg name="remoteReq" type="b" /> <!-- boolean,  mode change was request by remote peer  -->
+		<arg name="resultCode" type="q" />
+		<arg name="resultSupplier" type="q" />
+	</signal>
+
+	<signal name="StatusAudioInd">
+		<arg name="connectionId" type="u" /> <!--  connection index  -->
+		<arg name="audioType" type="y" /> <!--  data type in pointer  -->
+		<arg name="audioSetting" type="ay" /> <!-- byte array,  pointer to "dataType" audio parameters  -->
+	</signal>
+
+	<signal name="RingCfm">
+		<arg name="connectionId" type="u" /> <!--  connection index  -->
+	</signal>
+
+	<signal name="AnswerInd">
+		<arg name="connectionId" type="u" /> <!--  connection index  -->
+	</signal>
+
+	<signal name="RejectInd">
+		<arg name="connectionId" type="u" /> <!--  connection index  -->
+	</signal>
+
+	<signal name="CallHandlingInd">
+		<arg name="connectionId" type="u" /> <!--  connection index  -->
+		<arg name="value" type="y" /> <!-- uint8,  chld/btrh command (see csr_bt_hf.h for defines)  -->
+		<arg name="index" type="y" /> <!-- uint8,  call index affected (for chld 1x and 2x)  -->
+	</signal>
+
+	<signal name="DialInd">
+		<arg name="connectionId" type="u" /> <!--  connection index  -->
+		<arg name="command" type="y" /> <!--  dial, memory-dial or re-dial  -->
+		<arg name="number" type="s" /> <!-- ,  number or memory index to dial  -->
+	</signal>
+
+	<signal name="SpeakerGainInd">
+		<arg name="connectionId" type="u" /> <!--  connection index  -->
+		<arg name="gain" type="y" /> <!-- uint8,  absolute value for volume setting at the local end  -->
+	</signal>
+
+	<signal name="MicGainInd">
+		<arg name="connectionId" type="u" /> <!--  connection index  -->
+		<arg name="gain" type="y" /> <!-- uint8,  absolute value for volume setting at the local end  -->
+	</signal>
+
+	<signal name="AtCmdInd">
+		<arg name="connectionId" type="u" /> <!--  connection index  -->
+		<arg name="cmeeEnabled" type="b" /> <!-- boolean,  is cmee on/off, only valid in AT parser semi-mode  -->
+		<arg name="command" type="s" /> <!-- ,  null-terminated AT command string  -->
+	</signal>
+
+	<signal name="OperatorInd">
+		<arg name="connectionId" type="u" /> <!--  connection index  -->
+	</signal>
+
+	<signal name="CallListInd">
+		<arg name="connectionId" type="u" /> <!--  connection index  -->
+	</signal>
+
+	<signal name="SubscriberNumberInd">
+		<arg name="connectionId" type="u" /> <!--  connection index  -->
+	</signal>
+
+	<signal name="GenerateDtmfInd">
+		<arg name="connectionId" type="u" /> <!--  connection index  -->
+		<arg name="dtmf" type="y" /> <!-- uint8,  single dtmf tone to generate  -->
+	</signal>
+
+	<signal name="NoiseEchoInd">
+		<arg name="connectionId" type="u" /> <!--  connection index  -->
+		<arg name="nrec" type="b" /> <!-- boolean,  true for on, false for off  -->
+	</signal>
+
+	<signal name="BtInputInd">
+		<arg name="connectionId" type="u" /> <!--  connection index  -->
+		<arg name="request" type="y" /> <!-- uint8,  binp type request number  -->
+	</signal>
+
+	<signal name="VoiceRecogInd">
+		<arg name="connectionId" type="u" /> <!--  connection index  -->
+		<arg name="bvra" type="b" /> <!-- boolean,  true for on, false for off  -->
+	</signal>
+
+	<signal name="C2cSfInd">
+		<arg name="connectionId" type="u" /> <!--  connection index  -->
+		<arg name="indicators" type="ay" /> <!-- byte array,  pointer to array of indicators  -->
+	</signal>
+
+	<signal name="C2cSmsGetInd">
+		<arg name="connectionId" type="u" /> <!--  connection index  -->
+		<arg name="smsIndex" type="q" /> <!-- uint16,  index of sms being requested  -->
+	</signal>
+
+	<signal name="C2cBatteryInd">
+		<arg name="connectionId" type="u" /> <!--  connection index  -->
+		<arg name="batteryLevel" type="y" /> <!-- uint8,  current battery level for the HF  -->
+	</signal>
+
+	<signal name="C2cPowerInd">
+		<arg name="connectionId" type="u" /> <!--  connection index  -->
+		<arg name="powerStatus" type="y" /> <!-- uint8,  power status (mains, battery, etc.)  -->
+	</signal>
+
+	<signal name="ManualIndicatorInd">
+		<arg name="connectionId" type="u" /> <!--  connection index  -->
+	</signal>
+
+	<signal name="ConfigSingleAtcmdCfm">
+		<arg name="result" type="y" /> <!--  SUCCESS or error  -->
+	</signal>
+
+	<signal name="ConfigAtcmdHandlingCfm">
+		<arg name="result" type="y" /> <!--  SUCCESS or error  -->
+		<arg name="bitwiseIndicators" type="ay" /> <!-- byte array,  pointer to array of bit values with the actual settings
+                                                                   if result is SUCCESS these values will be the same as in request  -->
+	</signal>
+
+	<signal name="GetC2cAdpcmLocalSupportedInd">
+		<arg name="result" type="b" /> <!-- boolean,  Supported or not  -->
+	</signal>
+
+	<signal name="DeregisterTimeCfm">
+		<arg name="result" type="y" /> <!--  SUCCESS or error  -->
+	</signal>
+
+	<!-- Activate the HF service. This signal is used to allowed remote devicesto find and discover the HFG service and subsequently connect to it.The HFG will send a CSR_BT_HFG_SERVICE_CONNECT_IND back to the initiator withthe result of the connection attempt. -->
+	<method name="ActivateReq">
+		<arg name="phandle" type="q" direction="in" /><!-- uint16,  application queue  -->
+		<arg name="atMode" type="y" direction="in" /><!--  how should AT parser behave?  -->
+		<arg name="numConnections" type="y" direction="in" /><!-- uint8,  number of connections to support (1 or 2)  -->
+		<arg name="serviceName" type="s" direction="in" /><!-- ,  service record service name  -->
+		<arg name="supportedFeatures" type="u" direction="in" /><!-- uint32,  HFG/AG specification supported features bitmask  -->
+		<arg name="callConfig" type="u" direction="in" /><!-- uint32,  Call and CHLD/BTRH configuration bitmask (see HFG_CRH_...)  -->
+		<arg name="hfgConfig" type="u" direction="in" /><!-- uint32,  Configuration bitmask (see HFG_CNF_...)  -->
+	</method>
+
+	<method name="DeactivateReq">
+	</method>
+
+	<!-- A CSR_BT_HFG_SERVICE_CONNECT_REQ will initiate a connection towards a devicespecified by the Bluetooth device address.The HFG will send a CSR_BT_HFG_SERVICE_CONNECT_IND back to the initiator withthe result of the connection attempt. -->
+	<method name="ServiceConnectReq">
+		<arg name="deviceAddr" type="s" direction="in" /><!-- Bluetooth device address,  address of device connecting to.  -->
+		<arg name="connectionType" type="y" direction="in" /><!--  connect to HFG, AG or Unknown (for auto-detect)  -->
+	</method>
+
+	<!-- The CSR_BT_HFG_CANCEL_CONNECT_REQ will cancel a ongoing connection attempt -->
+	<method name="CancelConnectReq">
+		<arg name="deviceAddr" type="s" direction="in" /><!-- Bluetooth device address,  address to cancel connection attempt for  -->
+	</method>
+
+	<!-- Disconnect a service level connection in the HFG manager. If a call isin progress, the call will be disconnected.A CSR_BT_HFG_DISCONNECT_IND is always received as response. No signals must beissued to the HFG manager before the disconnect is confirmed by aCSR_BT_HFG_DISCONNECT_IND. -->
+	<method name="DisconnectReq">
+		<arg name="connectionId" type="u" direction="in" /><!--  connection index  -->
+	</method>
+
+	<!-- Connect/disconnect the audio path on the established service level connection.The audio switching is confirmed by a CSR_BT_HFG_AUDIO_CONNECT_CFM. -->
+	<method name="AudioConnectReq">
+		<arg name="connectionId" type="u" direction="in" /><!--  connection index  -->
+		<arg name="pcmSlot" type="y" direction="in" /><!-- uint8,  pcm slot to use  -->
+		<arg name="pcmRealloc" type="b" direction="in" /><!-- boolean,  automatically reallocate if pcm-slot is in use?  -->
+	</method>
+
+	<!-- Map SCO to a specific PCM slot -->
+	<method name="AudioAcceptConnectRes">
+		<arg name="connectionId" type="u" direction="in" /><!--  Connection indentifier  -->
+		<arg name="acceptResponse" type="y" direction="in" /><!--  The HCI response code from profile can be one of the following:
+                                                                   HCI_SUCCESS, HCI_ERROR_REJ_BY_REMOTE_NO_RES, HCI_ERROR_REJ_BY_REMOTE_PERS
+                                                                   Note: If this is != HCI_SUCCESS then the incoming SCO/eSCO connection will be rejected  -->
+<!--
+typedef struct
+{
+    hci_pkt_type_t (uint16, q)              packetTypes;   /* Specifies which SCO/eSCO packet types to accept */
+    CsrUint32, u                   txBandwidth;   /* Specifies the maximum Transmission bandwidth to accept */
+    CsrUint32, u                   rxBandwidth;   /* Specifies the maximum Receive bandwidth to accept */
+    CsrUint16, q                   maxLatency;    /* Specifies the maximum Latency to accept */
+    CsrUint16, q                   contentFormat; /* Specifies which SCO/eSCO content format to accept */
+    CsrUint8,  y                    reTxEffort;    /* Specifies the Retransmission setting(s) to accept */
+} CsrBtHfgAudioIncomingAcceptParameters;
+-->
+		<arg name="acceptParameters" type="a(quuqqy)" direction="in" /> <!--  Specifies which SCO/eSCO parameters to accept. If NULL the default ACCEPT SCO parameters from csr_bt_usr_config.h or CSR_BT_HFG_CONFIG_AUDIO_REQ are used  -->
+		<arg name="pcmSlot" type="y" direction="in" /><!-- uint8,  pcm slot to use  -->
+		<arg name="pcmReassign" type="b" direction="in" /><!-- boolean,  automatically assign another pcm-slot if pcmSlot given in this response is already in use. The resulting pcmSlot will be informed in the CSR_BT_HF_AUDIO_CONNECT_IND  -->
+	</method>
+
+	<!-- disconnect the audio path on the established service level connection.The audio switching is confirmed by a CSR_BT_HFG_AUDIO_DISCONNECT_CFM. -->
+	<method name="AudioDisconnectReq">
+		<arg name="connectionId" type="u" direction="in" /><!--  Connection indentifier  -->
+	</method>
+
+	<method name="SecurityInReq">
+		<arg name="appHandle" type="q" direction="in" /><!-- uint16,  requesting application queue  -->
+		<arg name="secLevel" type="q" direction="in" /> <!-- uint16 -->
+	</method>
+
+	<method name="SecurityOutReq">
+		<arg name="appHandle" type="q" direction="in" /><!-- uint16,  requesting application queue  -->
+		<arg name="secLevel" type="q" direction="in" /> <!-- uint16 -->
+	</method>
+
+	<!-- Setup sniff mode mask. The HFG automatically uses sniff-mode whetheryou use this signal or not!!! -->
+	<method name="ConfigSniffReq">
+		<arg name="mask" type="u" direction="in" /><!--  power setup bitmask  -->
+	</method>
+
+	<method name="ConfigAudioReq">
+		<arg name="connectionId" type="u" direction="in" /><!--  connection index  -->
+		<arg name="audioType" type="y" direction="in" /><!--  data type in pointer  -->
+		<arg name="audioSetting" type="ay" direction="in" /><!-- byte array,  pointer to "dataType" audio parameters  -->
+	</method>
+
+	<!-- The RING request signal is used to start a call when the service levelconnection is setup. The RING request must not be sent before the servicelevel connection confirmed. -->
+	<method name="RingReq">
+		<arg name="connectionId" type="u" direction="in" /><!--  connection index  -->
+		<arg name="repetitionRate" type="q" direction="in" /><!-- uint16,  repetitions rate of rings at the headset  -->
+		<arg name="numOfRings" type="y" direction="in" /><!-- uint8,  number of rings, 255 means no limit  -->
+		<arg name="number" type="s" direction="in" /><!-- ,  number of calling party  -->
+		<arg name="name" type="s" direction="in" /><!-- ,  name of callee  -->
+		<arg name="numType" type="y" direction="in" /><!-- uint8,  type of number  -->
+	</method>
+
+	<!-- Notify headset about a new waiting call (+CCWA) -->
+	<method name="CallWaitingReq">
+		<arg name="connectionId" type="u" direction="in" /><!--  connection index  -->
+		<arg name="number" type="s" direction="in" /><!-- ,  number of calling party  -->
+		<arg name="name" type="s" direction="in" /><!-- ,  name of callee  -->
+		<arg name="numType" type="y" direction="in" /><!-- uint8,  type of number  -->
+	</method>
+
+	<!-- Send unsolicited call handling (BTRH) request -->
+	<method name="CallHandlingReq">
+		<arg name="connectionId" type="u" direction="in" /><!--  connection index  -->
+		<arg name="btrh" type="y" direction="in" /><!--  btrh request  -->
+	</method>
+
+	<!-- Send call status response code for CHLD and BTRH -->
+	<method name="CallHandlingRes">
+		<arg name="connectionId" type="u" direction="in" /><!--  connection index  -->
+		<arg name="cmeeCode" type="q" direction="in" /><!-- uint16,  cmee error code  -->
+		<arg name="btrh" type="y" direction="in" /><!--  btrh response, use HFG_BTRH_IGNORE for chld responses  -->
+	</method>
+
+	<!-- Send response to headset-requested dial command -->
+	<method name="DialRes">
+		<arg name="connectionId" type="u" direction="in" /><!--  connection index  -->
+		<arg name="cmeeCode" type="q" direction="in" /><!-- uint16,  cmee error code  -->
+	</method>
+
+	<!-- Send request to change the speaker gain. -->
+	<method name="SpeakerGainReq">
+		<arg name="connectionId" type="u" direction="in" /><!--  connection index  -->
+		<arg name="gain" type="y" direction="in" /><!-- uint8,  absolute value for volume setting at the remote end  -->
+	</method>
+
+	<!-- Send request to change the microphone gain. -->
+	<method name="MicGainReq">
+		<arg name="connectionId" type="u" direction="in" /><!--  connection index  -->
+		<arg name="gain" type="y" direction="in" /><!-- uint8,  absolute value for volume setting at the remote end  -->
+	</method>
+
+	<!-- Send an AT-command defined by the higher layer to HFG. -->
+	<method name="AtCmdReq">
+		<arg name="connectionId" type="u" direction="in" /><!--  connection index  -->
+		<arg name="command" type="s" direction="in" /><!-- ,  null-terminated AT command string  -->
+	</method>
+
+	<!-- Send response to CSR_BT_HFG_OPERATOR_IND. -->
+	<method name="OperatorRes">
+		<arg name="connectionId" type="u" direction="in" /><!--  connection index  -->
+		<arg name="mode" type="y" direction="in" /><!-- uint8,  mode parameter  -->
+		<arg name="operatorName" type="s" direction="in" /><!-- ,  operator string name  -->
+		<arg name="cmeeCode" type="q" direction="in" /><!-- uint16,  error code if input request not supported  -->
+	</method>
+
+	<!-- Send response to a CSR_BT_HFG_CALL_LIST_IND, ie. a list of current callsand their status. You need to call this function multiple times ifmore than one call is present. The "final" parameter tells the HFGthat the call is the last in list. All other parameters are describedin the HFP-1.5 specification under the command "CLCC". -->
+	<method name="CallListRes">
+		<arg name="connectionId" type="u" direction="in" /><!--  connection index  -->
+		<arg name="final" type="b" direction="in" /><!-- boolean,  is this the final call list entry?  -->
+		<arg name="idx" type="y" direction="in" /><!-- uint8,  call index  -->
+		<arg name="dir" type="y" direction="in" /><!-- uint8,  direction (0=out, 1=in)  -->
+		<arg name="stat" type="y" direction="in" /><!-- uint8,  hold status (0,1,2,3,4 or 5)  -->
+		<arg name="mode" type="y" direction="in" /><!-- uint8,  call mode (0=voice, 1=data, 2=fax)  -->
+		<arg name="mpy" type="y" direction="in" /><!-- uint8,  multiparty (0=no, 1=yes)  -->
+		<arg name="number" type="s" direction="in" /><!-- ,  number of remote peer  -->
+		<arg name="numType" type="y" direction="in" /><!-- uint8,  type of number  -->
+		<arg name="cmeeCode" type="q" direction="in" /><!-- uint16,  error code if input request not supported  -->
+	</method>
+
+	<!-- Headset has requested the handset's subscriber number list(ie. own network number(s)). The "final" parameter tells the HFGif more response messages are sent. -->
+	<method name="SubscriberNumberRes">
+		<arg name="connectionId" type="u" direction="in" /><!--  connection index  -->
+		<arg name="final" type="b" direction="in" /><!-- boolean,  is this the final subscriber number list entry?  -->
+		<arg name="number" type="s" direction="in" /><!-- ,  subscriber number  -->
+		<arg name="numType" type="y" direction="in" /><!-- uint8,  type of number  -->
+		<arg name="service" type="y" direction="in" /><!-- uint8,  type of service (voice/fax)  -->
+		<arg name="cmeeCode" type="q" direction="in" /><!-- uint16,  error code if input request not supported  -->
+	</method>
+
+	<!-- Update status indicators (known as CIEV) and send update to theheadset if anything changed. Defines for the parameters can be foundin the "csr_bt_hf.h" file -->
+	<method name="StatusIndicatorSetReq">
+		<arg name="connectionId" type="u" direction="in" /><!--  connection index  -->
+		<arg name="indicator" type="y" direction="in" /><!-- uint8,  indicator to update  -->
+		<arg name="value" type="y" direction="in" /><!-- uint8,  new value of indicator  -->
+	</method>
+
+	<method name="InbandRingingReq">
+		<arg name="connectionId" type="u" direction="in" /><!--  connection index  -->
+		<arg name="inband" type="b" direction="in" /><!-- boolean,  true for on, false for off  -->
+	</method>
+
+	<!-- Send a "+BINP" response to a "AT+BINP". Please see the HFP-1.5specification on more info about the BINP command. -->
+	<method name="BtInputRes">
+		<arg name="connectionId" type="u" direction="in" /><!--  connection index  -->
+		<arg name="cmeeCode" type="q" direction="in" /><!-- uint16,  error code if input request not supported  -->
+		<arg name="response" type="s" direction="in" /><!-- ,  response string  -->
+	</method>
+
+	<method name="VoiceRecogReq">
+		<arg name="connectionId" type="u" direction="in" /><!--  connection index  -->
+		<arg name="bvra" type="b" direction="in" /><!-- boolean,  true for on, false for off  -->
+	</method>
+
+	<method name="VoiceRecogRes">
+		<arg name="connectionId" type="u" direction="in" /><!--  connection index  -->
+		<arg name="cmeeCode" type="q" direction="in" /><!-- uint16,  cmee error code  -->
+	</method>
+
+	<!-- Update the CSR-2-CSR supported features like text-to-speech,SMS notification etc. -->
+	<method name="C2cSfReq">
+		<arg name="connectionId" type="u" direction="in" /><!--  connection index  -->
+		<arg name="number" type="y" direction="in" /><!-- uint8,  indicator to update  -->
+		<arg name="value" type="y" direction="in" /><!-- uint8,  new value  -->
+	</method>
+
+	<!-- Send unsolicited text to be speech-synthesized to the headset. -->
+	<method name="C2cTxtReq">
+		<arg name="connectionId" type="u" direction="in" /><!--  connection index  -->
+		<arg name="text" type="s" direction="in" /><!-- ,  text to send  -->
+	</method>
+
+	<!-- Notify headset about a newly arrived text message (SMS). -->
+	<method name="C2cSmsArriveReq">
+		<arg name="connectionId" type="u" direction="in" /><!--  connection index  -->
+		<arg name="smsIndex" type="q" direction="in" /><!-- uint16,  index of arrived sms  -->
+		<arg name="number" type="s" direction="in" /><!-- ,  number of sending party  -->
+		<arg name="name" type="s" direction="in" /><!-- ,  phonebook name of sending party  -->
+	</method>
+
+	<method name="C2cSmsTxtReq">
+		<arg name="connectionId" type="u" direction="in" /><!--  connection index  -->
+		<arg name="smsText" type="s" direction="in" /><!-- ,  body text of sms  -->
+	</method>
+
+	<!-- If the HFG_CNF_MANUAL_INDICATOR has been enabled in the activation,the HFG will quiry the application for the full status indicatorsetup when the AT startup sequence to ease porting of old applicationsThis feature should only be used by legacy applications. New implementationsshould simply send the status indications whenever they change as the HFGwill automatically send the CIND otherwise. -->
+	<method name="ManualIndicatorRes">
+		<arg name="connectionId" type="u" direction="in" /><!--  connection index  -->
+		<arg name="service" type="y" direction="in" />
+		<arg name="callStatus" type="y" direction="in" />
+		<arg name="callSetup" type="y" direction="in" />
+		<arg name="callHeld" type="y" direction="in" />
+		<arg name="signalStrength" type="y" direction="in" />
+		<arg name="roam" type="y" direction="in" />
+		<arg name="battery" type="y" direction="in" />
+	</method>
+
+	<!-- Setup whether a particular AT command shall be handled in the profileor just forwarded unhandled to the application -->
+	<method name="ConfigSingleAtcmdReq">
+		<arg name="phandle" type="q" direction="in" /><!-- uint16,  application queue  -->
+		<arg name="idx" type="y" direction="in" /><!-- uint8,  position of AT command in table  -->
+		<arg name="sendToApp" type="b" direction="in" /><!-- boolean,  TRUE = send to app without handling it in profile  -->
+	</method>
+
+	<!-- Setup whether a particular AT command shall be handled in the profileor just forwarded unhandled to the application -->
+	<method name="ConfigAtcmdHandlingReq">
+		<arg name="phandle" type="q" direction="in" /><!-- uint16,  application queue  -->
+		<arg name="bitwiseIndicators" type="ay" direction="in" /><!-- byte array,  pointer to array of bit values  -->
+	</method>
+
+</interface></node>

@@ -1,0 +1,329 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN" "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<node><interface name="com.bluegiga.v2.bt.cm">
+
+<!-- signal:SetLocalNameCfm
+#ifdef INC_SetLocalNameCfm
+-->
+	<signal name="SetLocalNameCfm">
+		<arg name="resultCode" type="q" />
+		<arg name="resultSupplier" type="q" />
+	</signal>
+<!--
+#endif
+-->
+
+<!-- signal:ReadLocalBdAddrCfm
+#ifdef INC_ReadLocalBdAddrCfm
+-->
+	<signal name="ReadLocalBdAddrCfm">
+		<arg name="deviceAddr" type="s" />
+	</signal>
+<!--
+#endif
+-->
+
+<!-- signal:ReadLocalNameCfm
+#ifdef INC_ReadLocalNameCfm
+-->
+	<signal name="ReadLocalNameCfm">
+		<arg name="localName" type="s" />
+	</signal>
+<!--
+#endif
+-->
+
+<!-- signal:WriteCodCfm
+#ifdef INC_WriteCodCfm
+-->
+	<signal name="WriteCodCfm">
+		<arg name="resultCode" type="q" />
+		<arg name="resultSupplier" type="q" />
+	</signal>
+<!--
+#endif
+-->
+
+<!-- signal:ReadCodCfm
+#ifdef INC_ReadCodCfm
+-->
+	<signal name="ReadCodCfm">
+		<arg name="classOfDevice" type="u" /> <!-- 24bit unsigned integer -->
+		<arg name="resultCode" type="q" />
+		<arg name="resultSupplier" type="q" />
+	</signal>
+<!--
+#endif
+-->
+
+<!-- signal:EirUpdateManufacturerDataCfm
+#ifdef INC_EirUpdateManufacturerDataCfm
+-->
+	<signal name="EirUpdateManufacturerDataCfm">
+		<arg name="resultCode" type="q" />
+		<arg name="resultSupplier" type="q" />
+	</signal>
+<!--
+#endif
+-->
+
+<!-- signal:EnableDutModeCfm
+#ifdef INC_EnableDutModeCfm
+-->
+	<signal name="EnableDutModeCfm">
+		<arg name="stepNumber" type="y" />
+		<arg name="resultCode" type="q" />
+		<arg name="resultSupplier" type="q" />
+	</signal>
+<!--
+#endif
+-->
+
+<!-- signal:WriteScanEnableCfm
+#ifdef INC_WriteScanEnableCfm
+-->
+	<signal name="WriteScanEnableCfm">
+		<arg name="resultCode" type="q" />
+		<arg name="resultSupplier" type="q" />
+	</signal>
+<!--
+#endif
+-->
+
+<!-- signal:ReadScanEnableCfm
+#ifdef INC_ReadScanEnableCfm
+-->
+	<signal name="ReadScanEnableCfm">
+		<arg name="scanEnable" type="y" />
+		<arg name="resultCode" type="q" />
+		<arg name="resultSupplier" type="q" />
+	</signal>
+<!--
+#endif
+-->
+
+<!-- signal:WriteLinkSupervTimeoutCfm
+#ifdef INC_WriteLinkSupervTimeoutCfm
+-->
+	<signal name="WriteLinkSupervTimeoutCfm">
+		<arg name="deviceAddr" type="s" />
+		<arg name="resultCode" type="q" />
+		<arg name="resultSupplier" type="q" />
+	</signal>
+<!--
+#endif
+-->
+
+<!-- signal:WritePageToCfm
+#ifdef INC_WritePageToCfm
+-->
+	<signal name="WritePageToCfm">
+		<arg name="resultCode" type="q" />
+		<arg name="resultSupplier" type="q" />
+	</signal>
+<!--
+#endif
+-->
+
+<!-- method:SetLocalNameReq
+#ifdef INC_SetLocalNameReq
+-->
+	<method name="SetLocalNameReq">
+		<arg name="phandle" type="q" direction="in" />
+		<arg name="friendlyName" type="s" direction="in" />
+	</method>
+<!--
+#endif
+-->
+
+<!-- method:ReadLocalBdAddrReq
+#ifdef INC_ReadLocalBdAddrReq
+-->
+	<method name="ReadLocalBdAddrReq">
+		<arg name="phandle" type="q" direction="in" />
+	</method>
+<!--
+#endif
+-->
+
+<!-- method:ReadLocalNameReq
+#ifdef INC_ReadLocalNameReq
+-->
+	<method name="ReadLocalNameReq">
+		<arg name="phandle" type="q" direction="in" />
+	</method>
+<!--
+#endif
+-->
+
+<!-- method:ReadCodReq
+#ifdef INC_ReadCodReq
+-->
+	<method name="ReadCodReq">
+		<arg name="appHandle" type="q" direction="in" />
+	</method>
+<!--
+#endif
+-->
+
+
+<!-- method:WriteMajorMinorCodReq
+#ifdef INC_WriteMajorMinorCodReq
+-->
+	<method name="WriteMajorMinorCodReq">
+		<arg name="appHandle" type="q" direction="in" />
+		<arg name="majorClassOfDevice" type="u" direction="in" />
+		<arg name="minorClassOfDevice" type="u" direction="in" />
+	</method>
+<!--
+#endif
+-->
+
+	<!-- Used for setting a the manufacturer specific data in an Extended InquiryResponse. -->
+<!-- method:EirUpdateManufacturerDataReq
+#ifdef INC_EirUpdateManufacturerDataReq
+-->
+	<method name="EirUpdateManufacturerDataReq">
+		<arg name="appHandle" type="q" direction="in" />
+		<arg name="manufacturerDataSettings" type="q" direction="in" />
+		<arg name="manufacturerData" type="ay" direction="in" />
+	</method>
+<!--
+#endif
+-->
+
+<!-- method:EnableDutModeReq
+#ifdef INC_EnableDutModeReq
+-->
+	<method name="EnableDutModeReq">
+		<arg name="appHandle" type="q" direction="in" />
+	</method>
+<!--
+#endif
+-->
+
+<!-- method:WriteScanEnableReq
+#ifdef INC_WriteScanEnableReq
+-->
+	<method name="WriteScanEnableReq">
+		<arg name="appHandle" type="q" direction="in" />
+		<arg name="disableInquiryScan" type="b" direction="in" />
+		<arg name="disablePageScan" type="b" direction="in" />
+	</method>
+<!--
+#endif
+-->
+
+<!-- method:ReadScanEnableReq
+#ifdef INC_ReadScanEnableReq
+-->
+	<method name="ReadScanEnableReq">
+		<arg name="appHandle" type="q" direction="in" />
+	</method>
+<!--
+#endif
+-->
+
+<!-- method:WritePageToReq
+#ifdef INC_WritePageToReq
+-->
+	<method name="WritePageToReq">
+                <arg name="appHandle" type="q" direction="in" />
+                <arg name="pageTimeout" type="q" direction="in" />
+        </method>
+<!--
+#endif
+-->
+
+<!-- method:ReadLocalVersionReq
+#ifdef INC_ReadLocalVersionReq
+-->
+	<method name="ReadLocalVersionReq">
+		<arg name="appHandle" type="q" direction="in" />
+	</method>
+<!--
+#endif
+-->
+
+<!-- method:ReadRssiReq
+#ifdef INC_ReadRssiReq
+-->
+	<method name="ReadRssiReq">
+		<arg name="appHandle" type="q" direction="in" />
+		<arg name="deviceAddr" type="s" direction="in" />
+	</method>
+<!--
+#endif
+-->
+
+<!-- method:ReadRemoteNameReq
+#ifdef INC_ReadRemoteNameReq
+-->
+	<method name="ReadRemoteNameReq">
+		<arg name="appHandle" type="q" direction="in" />
+		<arg name="deviceAddr" type="s" direction="in" />
+	</method>
+<!--
+#endif
+-->
+	
+<!-- method:CancelReadRemoteNameReq
+#ifdef INC_CancelReadRemoteNameReq
+-->
+	<method name="CancelReadRemoteNameReq">
+	        <arg name="appHandle" type="q" direction="in" />
+		<arg name="deviceAddr" type="s" direction="in" />
+        </method>
+<!--
+#endif
+-->	
+
+<!-- signal:ReadRssiCfm
+#ifdef INC_ReadRssiCfm
+-->
+	<signal name="ReadRssiCfm">
+		<arg name="deviceAddr" type="s" direction="in" />
+		<arg name="resultCode" type="q" />
+                <arg name="resultSupplier" type="q" />
+                <arg name="rssi" type="n" />
+	</signal>
+<!--
+#endif
+-->
+
+<!-- signal:ReadRemoteNameCfm
+#ifdef INC_ReadRemoteNameCfm
+-->
+	<signal name="ReadRemoteNameCfm">
+		<arg name="deviceAddr" type="s" direction="in" />
+		<arg name="resultCode" type="q" />
+		<arg name="resultSupplier" type="q" />
+		<arg name="friendlyName" type="s" />
+	</signal>
+<!--
+#endif
+-->
+	
+
+<!-- signal:ReadLocalVersionCfm
+#ifdef INC_ReadLocalVersionCfm
+-->
+	<signal name="ReadLocalVersionCfm">
+		<arg name="lmpVersion" type="y" />
+	</signal>
+<!--
+#endif
+-->
+
+<!-- method:RoleSwitchConfigReq
+#ifdef INC_RoleSwitchConfigReq
+-->
+	<method name="RoleSwitchConfigReq">
+		<arg name="config" type="u" direction="in" />
+	</method>
+<!--
+#endif
+-->
+
+
+</interface></node>
+

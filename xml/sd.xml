@@ -1,0 +1,454 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN" "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<node><interface name="com.bluegiga.v2.bt.sd">
+
+<!-- signal: MemoryConfigCfm
+#ifdef INC_MemoryConfigCfm
+-->
+	<signal name="MemoryConfigCfm">
+		<arg name="resultCode" type="q" /> <!-- BtResultCode -->
+		<arg name="resultSupplier" type="q" /> <!-- BtSupplier -->
+		<arg name="memoryConfig" type="u" /> <!-- Uint32 -->
+		<arg name="deviceListMax" type="u" /> <!-- Uint32 -->
+		<arg name="deviceListInfoMax" type="u" /> <!-- Uint32 -->
+	</signal>
+
+<!--
+#endif
+-->
+
+<!-- signal: SearchConfigCfm
+#ifdef INC_SearchConfigCfm
+-->
+	<signal name="SearchConfigCfm">
+		<arg name="resultCode" type="q" /> <!-- BtResultCode -->
+		<arg name="resultSupplier" type="q" /> <!-- BtSupplier -->
+		<arg name="searchConfig" type="u" /> <!-- Uint32 -->
+		<arg name="readNameTimeout" type="u" /> <!-- Uint32 -->
+		<arg name="maxSearchResults" type="u" /> <!-- Uint32 -->
+	</signal>
+
+<!--
+#endif
+-->
+
+<!-- signal: ReadDeviceInfoCfm
+#ifdef INC_ReadDeviceInfoCfm
+-->
+	<signal name="ReadDeviceInfoCfm">
+		<arg name="resultCode" type="q" /> <!-- BtResultCode -->
+		<arg name="resultSupplier" type="q" /> <!-- BtSupplier -->
+		<arg name="deviceAddr" type="s" /> <!-- BtDeviceAddr -->
+		<arg name="deviceClass" type="u" /> <!-- BtClassOfDevice -->
+		<arg name="info" type="a{qv}" /> <!-- std::map<uint16_t, DBus::Variant>; -->
+		<arg name="deviceStatus" type="u" /> <!-- Uint32 -->
+	</signal>
+
+<!--
+#endif
+-->
+
+<!-- signal: SearchResultInd
+#ifdef INC_SearchResultInd
+-->
+	<signal name="SearchResultInd">
+		<arg name="deviceAddr" type="s" /> <!-- BtDeviceAddr -->
+		<arg name="deviceClass" type="u" /> <!-- BtClassOfDevice -->
+		<arg name="rssi" type="n" /> <!-- 8bit signed integer -->
+		<arg name="info" type="a{qv}" /> <!-- std::map<uint16_t, DBus::Variant>; -->
+		<arg name="deviceStatus" type="u" /> <!-- Uint32 -->
+	</signal>
+
+<!--
+#endif
+-->
+
+<!-- signal: ImmediateSearchResultInd
+#ifdef INC_ImmediateSearchResultInd
+-->
+	<signal name="ImmediateSearchResultInd">
+		<arg name="deviceAddr" type="s" /> <!-- BtDeviceAddr -->
+		<arg name="deviceClass" type="u" /> <!-- BtClassOfDevice -->
+		<arg name="rssi" type="n" /> <!-- 8bit signed integer -->
+		<arg name="info" type="a{qv}" /> <!-- std::map<uint16_t, DBus::Variant>; -->
+		<arg name="deviceStatus" type="u" /> <!-- Uint32 -->
+	</signal>
+
+<!--
+#endif
+-->
+
+<!-- signal: CloseSearchInd
+#ifdef INC_CloseSearchInd
+-->
+	<signal name="CloseSearchInd">
+		<arg name="resultCode" type="q" /> <!-- BtResultCode -->
+		<arg name="resultSupplier" type="q" /> <!-- BtSupplier -->
+	</signal>
+
+<!--
+#endif
+-->
+
+<!-- signal: ReadAvailableServicesCfm
+#ifdef INC_ReadAvailableServicesCfm
+-->
+	<signal name="ReadAvailableServicesCfm">
+		<arg name="resultCode" type="q" /> <!-- BtResultCode -->
+		<arg name="resultSupplier" type="q" /> <!-- BtSupplier -->
+		<arg name="deviceAddr" type="s" /> <!-- BtDeviceAddr -->
+		<arg name="deviceClass" type="u" /> <!-- BtClassOfDevice -->
+		<arg name="info" type="a{qv}" /> <!-- std::map<uint16_t, DBus::Variant>; -->
+		<arg name="deviceStatus" type="u" /> <!-- Uint32 -->
+	</signal>
+
+<!--
+#endif
+-->
+
+<!-- signal: CancelReadAvailableServicesCfm
+#ifdef INC_CancelReadAvailableServicesCfm
+-->
+	<signal name="CancelReadAvailableServicesCfm">
+	</signal>
+
+<!--
+#endif
+-->
+
+<!-- signal: ReadDeviceListInd
+#ifdef INC_ReadDeviceListInd
+-->
+	<signal name="ReadDeviceListInd">
+		<arg name="deviceInfo" type="a{s(uua{qv})}" direction="in" />
+	</signal>
+
+
+<!--
+#endif
+-->
+
+<!-- signal: ReadDeviceListCfm
+#ifdef INC_ReadDeviceListCfm
+-->
+	<signal name="ReadDeviceListCfm">
+		<arg name="deviceInfo" type="a{s(uua{qv})}" direction="in" />
+		<arg name="totalNumOfDevices" type="q" direction="in" />
+	</signal>
+
+    <!-- Part of DI -->
+<!--
+#endif
+-->
+
+<!-- signal: ReadServiceRecordInd
+#ifdef INC_ReadServiceRecordInd
+-->
+	<signal name="ReadServiceRecordInd">
+		<arg name="dataLen" type="q" /> <!-- Uint16 -->
+		<arg name="data" type="ay" /> <!-- Uint8* -->
+	</signal>
+    
+    <!-- Part of DI -->
+<!--
+#endif
+-->
+
+<!-- signal: ReadDiServiceRecordV13Ind
+#ifdef INC_ReadDiServiceRecordV13Ind
+-->
+	<signal name="ReadDiServiceRecordV13Ind">
+    	<arg name="specificationId" type="i" /> <!-- uint16 for valid values, negative for invalid -->
+    	<arg name="vendorId" type="i" /> <!-- uint16 for valid values, negative for invalid -->
+    	<arg name="productId" type="i" /> <!-- uint16 for valid values, negative for invalid -->
+    	<arg name="version" type="i" /> <!-- uint16 for valid values, negative for invalid -->
+    	<arg name="primaryRecord" type="n" /> <!-- 0 = false, >0 == true, <0 = invalid -->
+    	<arg name="svendorId" type="i" /> <!-- uint16 for valud values, negative for invalid -->
+    	<arg name="clientExecutableUrl" type="s" /> <!-- left empty if no record -->
+    	<arg name="serviceDescription" type="ay" /> <!-- left empty if no record -->
+    	<arg name="documentationUlr" type="s" /> <!-- left empty if no record -->
+    </signal>
+
+    <!-- Part of DI -->
+<!--
+#endif
+-->
+
+<!-- signal: ReadServiceRecordCfm
+#ifdef INC_ReadServiceRecordCfm
+-->
+	<signal name="ReadServiceRecordCfm">
+		<arg name="resultCode" type="q" /> <!-- BtResultCode -->
+		<arg name="resultSupplier" type="q" /> <!-- BtSupplier -->
+	</signal>
+
+    <!-- Part of DI -->
+<!--
+#endif
+-->
+
+<!-- signal: RegisterServiceRecordCfm
+#ifdef INC_RegisterServiceRecordCfm
+-->
+	<signal name="RegisterServiceRecordCfm">
+		<arg name="serviceHandle" type="u" /> <!-- Uint32 -->
+		<arg name="resultCode" type="q" /> <!-- BtResultCode -->
+		<arg name="resultSupplier" type="q" /> <!-- BtSupplier -->
+	</signal>
+
+    <!-- Part of DI -->
+<!--
+#endif
+-->
+
+<!-- signal: UnregisterServiceRecordCfm
+#ifdef INC_UnregisterServiceRecordCfm
+-->
+	<signal name="UnregisterServiceRecordCfm">
+		<arg name="serviceHandle" type="u" /> <!-- Uint32 -->
+		<arg name="resultCode" type="q" /> <!-- BtResultCode -->
+		<arg name="resultSupplier" type="q" /> <!-- BtSupplier -->
+	</signal>
+
+<!--
+#endif
+-->
+
+<!-- signal: CleanupCfm
+#ifdef INC_CleanupCfm
+-->
+	<signal name="CleanupCfm">
+		<arg name="resultCode" type="q" /> <!-- BtResultCode -->
+		<arg name="resultSupplier" type="q" /> <!-- BtSupplier -->
+		<arg name="cleanupMode" type="u" /> <!-- Uint32 -->
+	</signal>
+
+<!--
+#endif
+-->
+
+<!-- signal: SynchronizeCfm
+#ifdef INC_SynchronizeCfm
+-->
+	<signal name="SynchronizeCfm">
+		<arg name="totalNumOfDevices" type="u" /> <!-- Uint32 -->
+	</signal>
+
+<!-- Use to change the memory-related behaviour of the SD -->
+<!--
+#endif
+-->
+
+<!-- method: MemoryConfigReq
+#ifdef INC_MemoryConfigReq
+-->
+	<method name="MemoryConfigReq">
+		<arg name="phandle" type="q" direction="in" /> <!-- Qid -->
+		<arg name="memoryConfig" type="u" direction="in" /> <!-- Uint32,  Currently BT_UNUSED - use BT_SD_MEMORY_CONFIG_DEFAULT  -->
+		<arg name="deviceListMax" type="u" direction="in" /> <!-- Uint32,  Currently BT_UNUSED - use BT_SD_MEMORY_LIST_MAX_DEFAULT  -->
+		<arg name="deviceListInfoMax" type="u" direction="in" /> <!-- Uint32,  Max number of devices for which to store additional info besides address and CoD  -->
+	</method>
+
+<!-- Configures the search parameters used in the SD. -->
+<!--
+#endif
+-->
+
+<!-- method: SearchConfigReq
+#ifdef INC_SearchConfigReq
+-->
+	<method name="SearchConfigReq">
+		<arg name="phandle" type="q" direction="in" /> <!-- Qid -->
+		<arg name="searchConfig" type="u" direction="in" /> <!-- Uint32 -->
+		<arg name="readNameTimeout" type="u" direction="in" /> <!-- Uint32 -->
+		<arg name="maxSearchResults" type="u" direction="in" /> <!-- Uint32 -->
+	</method>
+
+<!-- Returns all information that the SD knows about a specific device -->
+<!--
+#endif
+-->
+
+<!-- method: ReadDeviceInfoReq
+#ifdef INC_ReadDeviceInfoReq
+-->
+	<method name="ReadDeviceInfoReq">
+		<arg name="phandle" type="q" direction="in" /> <!-- Qid -->
+		<arg name="deviceAddr" type="s" direction="in" /> <!-- BtDeviceAddr -->
+	</method>
+
+<!--
+#endif
+-->
+
+<!-- method: SearchReq
+#ifdef INC_SearchReq
+-->
+	<method name="SearchReq">
+		<arg name="phandle" type="q" direction="in" /> <!-- Qid -->
+		<arg name="searchConfig" type="u"  direction="in" /> <!-- Uint32 -->
+		<arg name="rssiBufferTime" type="u"  direction="in" /> <!-- Uint32 -->
+		<arg name="totalSearchTime" type="u" direction="in"  /> <!-- Uint32 -->
+		<arg name="rssiThreshold" type="n"  direction="in" /> <!-- 8bit signed integer -->
+		<arg name="deviceClass" type="u"  direction="in" /> <!-- BtClassOfDevice -->
+		<arg name="deviceClassMask" type="u"  direction="in" /> <!-- BtClassOfDevice -->
+		<arg name="inquiryAccessCode" type="u"  direction="in" /> <!-- 24bit unsigned integer -->
+		<arg name="filter" type="ay"  direction="in" /> <!-- Reserved for future use. Set to empty array.  -->
+	</method>
+
+
+<!-- Cancel the service search -->
+<!--
+#endif
+-->
+
+<!-- method: CancelSearchReq
+#ifdef INC_CancelSearchReq
+-->
+	<method name="CancelSearchReq">
+		<arg name="phandle" type="q" direction="in" /> <!-- Qid -->
+	</method>
+
+<!-- Use the Discovery Service (SD) module to find the services offered by another devices -->
+<!--
+#endif
+-->
+
+<!-- method: ReadAvailableServicesReq
+#ifdef INC_ReadAvailableServicesReq
+-->
+	<method name="ReadAvailableServicesReq">
+		<arg name="phandle" type="q" direction="in" /> <!-- Qid -->
+		<arg name="deviceAddr" type="s" direction="in" /> <!-- BtDeviceAddr -->
+		<arg name="serviceConfig" type="u" direction="in" /> <!-- Uint32 -->
+		<arg name="filter" type="ay" direction="in" /> <!-- Reserved for future use. Set to empty array -->
+	</method>
+
+<!--
+#endif
+-->
+
+<!-- method: CancelReadAvailableServicesReq
+#ifdef INC_CancelReadAvailableServicesReq
+-->
+	<method name="CancelReadAvailableServicesReq">
+		<arg name="phandle" type="q" direction="in" /> <!-- Qid -->
+	</method>
+
+<!-- Returns all information that the SD holds about trusted devices -->
+<!--
+#endif
+-->
+
+<!-- method: ReadDeviceListReq
+#ifdef INC_ReadDeviceListReq
+-->
+	<method name="ReadDeviceListReq">
+		<arg name="phandle" type="q" direction="in" /> <!-- Qid -->
+		<arg name="maxNumOfBytesInEachResult" type="u" direction="in" /> <!-- Uint32 -->
+		<arg name="deviceListConfig" type="u" direction="in" /> <!-- Uint32 -->
+	</method>
+
+<!-- Read service records, use SdReadDiServiceRecordV13 instead -->
+<!--
+#endif
+-->
+
+<!-- method: ReadServiceRecordReq
+#ifdef INC_ReadServiceRecordReq
+-->
+	<method name="ReadServiceRecordReq">
+		<arg name="phandle" type="q" direction="in" /> <!-- Qid -->
+		<arg name="deviceAddr" type="s" direction="in" /> <!-- BtDeviceAddr -->
+		<arg name="flags" type="u" direction="in" /> <!-- Uint32,  Reserved for future use  -->
+		<arg name="data" type="a{qv}" direction="in" /> <!-- data vector -->
+	</method>
+
+<!-- Cancel the read service record procedure -->
+<!--
+#endif
+-->
+
+<!-- method: CancelReadServiceRecordReq
+#ifdef INC_CancelReadServiceRecordReq
+-->
+	<method name="CancelReadServiceRecordReq">
+		<arg name="phandle" type="q" direction="in" /> <!-- Qid -->
+	</method>
+
+<!-- Registers a service record, use SdRegisterDiServiceRecord instead -->
+<!--
+#endif
+-->
+
+<!-- method: RegisterServiceRecordReq
+#ifdef INC_RegisterServiceRecordReq
+-->
+	<method name="RegisterServiceRecordReq">
+		<arg name="phandle" type="q" direction="in" /> <!-- Qid -->
+		<arg name="flags" type="u" direction="in" /> <!-- Uint32,  Reserved for future use  -->
+		<arg name="data" type="a{qv}" direction="in" /> <!-- data vector -->
+	</method>
+	
+	
+<!--
+#endif
+-->
+
+<!-- method: RegisterDiServiceRecordV13Req
+#ifdef INC_RegisterDiServiceRecordV13Req
+-->
+	<method name="RegisterDiServiceRecordV13Req">
+		<arg name="phandle" type="q" direction="in" /> <!-- Qid -->
+		<arg name="vendorId" type="q" direction="in" /> <!-- uint16 -->
+		<arg name="productId" type="q" direction="in" /> <!-- uint16 -->
+		<arg name="version" type="q" direction="in" /> <!-- uint16 -->
+		<arg name="primaryRecord" type="b" direction="in" /> <!-- bool -->
+		<arg name="vendorIdSource" type="q" direction="in" /> <!-- uint16 -->
+		<arg name="serviceDescription" type="ay" direction="in" /> <!-- service description -->
+		<arg name="clientExecutableUrl" type="s" direction="in" />
+		<arg name="documentationUrl" type="s" direction="in" />
+	</method>
+
+
+<!-- Unregisters a service record -->
+<!--
+#endif
+-->
+
+<!-- method: UnregisterServiceRecordReq
+#ifdef INC_UnregisterServiceRecordReq
+-->
+	<method name="UnregisterServiceRecordReq">
+		<arg name="phandle" type="q" direction="in" /> <!-- Qid -->
+		<arg name="flags" type="u" direction="in" /> <!-- Uint32,  Reserved for future use  -->
+		<arg name="serviceHandle" type="u" direction="in" /> <!-- Uint32 -->
+	</method>
+
+<!-- Free memory used by the SD -->
+<!--
+#endif
+-->
+
+<!-- method: CleanupReq
+#ifdef INC_CleanupReq
+-->
+	<method name="CleanupReq">
+		<arg name="phandle" type="q" direction="in" /> <!-- Qid -->
+		<arg name="cleanupMode" type="u" direction="in" /> <!-- Uint32 -->
+	</method>
+
+<!--
+#endif
+-->
+
+<!-- method: SynchronizeReq
+#ifdef INC_SynchronizeReq
+-->
+	<method name="SynchronizeReq">
+		<arg name="phandle" type="q" direction="in" /> <!-- Qid -->
+	</method>
+<!--
+#endif
+-->
+
+</interface></node>

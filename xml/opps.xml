@@ -1,0 +1,96 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN" "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<node><interface name="com.bluegiga.v2.bt.opps">
+	<signal name="DeactivateCfm">
+	</signal>
+
+	<signal name="PutInd">
+		<arg name="totalObjectSize" type="u" /> <!-- uint32,  Total object size (as it may be split into multiple packets)  -->
+		<arg name="bodyType" type="s" /> <!-- ASCII string for mime type or empty if unknown  -->
+		<arg name="name" type="s" /> <!-- object name  -->
+		<arg name="bodyLength" type="u" /> <!-- size of data -->
+	</signal>
+
+	<signal name="PutNextInd">
+		<arg name="final" type="b" /> <!-- boolean indicating file is done -->
+		<arg name="bodyType" type="s" />
+		<arg name="name" type="s" /> <!-- unicode, zero-terminated  -->
+		<arg name="bodyLength" type="u" /> <!-- size of data -->
+	</signal>
+
+	<signal name="GetInd">
+		<arg name="bodyType" type="y" /> <!-- uint8 -->
+	</signal>
+
+	<signal name="GetNextInd">
+		<arg name="bodyType" type="y" /> <!-- uint8 -->
+	</signal>
+
+	<signal name="AbortInd">
+		<arg name="description" type="s" />
+	</signal>
+
+	<signal name="DisconnectInd">
+		<arg name="deviceAddr" type="s" /> <!-- Bluetooth device address -->
+		<arg name="reasonCode" type="q" />
+		<arg name="reasonSupplier" type="q" />
+	</signal>
+
+	<signal name="SecurityInCfm">
+		<arg name="resultCode" type="q" />
+		<arg name="resultSupplier" type="q" />
+	</signal>
+	
+	<signal name="ConnectInd">
+		<arg name="obexPeerMaxPacketSize" type="q" />
+		<arg name="deviceAddr" type="s" />
+		<arg name="length" type="u" />
+		<arg name="count" type="u" />
+		<arg name="btConnId" type="u" /> <!-- global bluetooth connection id (AMP) -->
+	</signal>
+		
+	<!-- Set the Object Push server in discoverable mode and in connectable mode -->
+	<method name="ActivateReq">
+		<arg name="appHandle" type="q" direction="in" /> <!-- uint16 -->
+		<arg name="supportedFormats" type="q" direction="in" /> <!-- uint16 -->
+		<arg name="windowSize" type="q" direction="in" /> <!-- uint16 -->
+		<arg name="srmEnable" type="b" direction="in" /> <!-- boolean -->
+	</method>
+
+	<method name="DeactivateReq">
+	</method>
+
+	<method name="PutRes">
+		<arg name="responseCode" type="y" direction="in" />
+		<arg name="filename" type="s" direction="in" /> <!-- where to store the incoming file -->
+		<arg name="srmpOn" type="b" direction="in" /> <!-- boolean, reserved, set to false -->
+	</method>
+
+
+	<method name="GetRes">
+		<arg name="responseCode" type="y" direction="in" />
+		<arg name="finalFlag" type="y" direction="in" /> <!-- uint8 -->
+		<arg name="bodyType" type="y" direction="in" />
+		<arg name="totalObjectSize" type="u" direction="in" /> <!-- uint32 -->
+		<arg name="name" type="s" direction="in" /><!--  Unicode string, zero-terminated  -->
+		<arg name="body" type="ay" direction="in" /> <!-- byte array -->
+		<arg name="srmpOn" type="b" direction="in" /> <!-- boolean -->
+	</method>
+
+	<method name="GetNextRes">
+		<arg name="responseCode" type="y" direction="in" />
+		<arg name="finalFlag" type="y" direction="in" /> <!-- uint8 -->
+		<arg name="body" type="ay" direction="in" /> <!-- byte array -->
+		<arg name="srmpOn" type="b" direction="in" /> <!-- boolean -->
+	</method>
+
+	<method name="ConnectRes">
+		<arg name="responseCode" type="y" direction="in" />
+	</method>
+
+	<!-- Set the default security settings for new incoming/outgoing connections -->
+	<method name="SecurityInReq">
+		<arg name="appHandle" type="q" direction="in" /> <!-- uint16 -->
+		<arg name="secLevel" type="q" direction="in" /> <!-- uint16 -->
+	</method>
+
+</interface></node>

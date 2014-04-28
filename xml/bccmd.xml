@@ -1,0 +1,43 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN" "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+
+<node><interface name="com.bluegiga.v2.fw.bccmd">
+<method name="WriteReq">
+        <arg name="phandle" type="q" direction="in" />
+        <arg name="varid" type="q" direction="in" />
+        <arg name="seqNo" type="q" direction="in" />
+        <arg name="payload" type="ay" direction="in" /> <!-- Payload in XAP format -->
+</method>
+
+<method name="ReadReq">
+        <arg name="phandle" type="q" direction="in" />
+        <arg name="varid" type="q" direction="in" />
+        <arg name="seqNo" type="q" direction="in" />
+        <arg name="payload" type="ay" direction="in" /> <!-- Payload in XAP format -->
+</method>
+
+<method name="WritePsValueReq">
+        <arg name="phandle" type="q" direction="in" />
+        <arg name="seqNo" type="q" direction="in" />
+        <arg name="key" type="q" direction="in" />
+        <arg name="stores" type="q" direction="in" />
+        <arg name="psValue" type="ay" direction="in" />
+</method>
+
+<method name="ReadPsValueReq">
+        <arg name="phandle" type="q" direction="in" />
+        <arg name="seqNo" type="q" direction="in" />
+        <arg name="key" type="q" direction="in" />
+        <arg name="stores" type="q" direction="in" />
+        <arg name="psValuelength" type="q" direction="in" />
+</method>
+
+
+<signal name="BccmdCfm">
+        <arg name="cmdType" type="q" />
+        <arg name="seqNo" type="q" />
+        <arg name="varId" type="q" />
+        <arg name="status" type="q" />
+        <arg name="payload" type="ay" />
+</signal>
+</interface></node>
+

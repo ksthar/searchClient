@@ -1,0 +1,213 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN" "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+
+<node><interface name="com.bluegiga.v2.bt.rfcommp">
+<!--
+
+Server:
+
+App   ->  Cm: RegisterReq (with queue id, and context)
+App   <-  Cm: RegisterCfm with server channel
+App   ->  CmSds: RegisterSdpReq
+App   <-  CmSds: RegisterSdpCfm
+App   ->  Cm: AcceptConnectReq
+//Device connects//
+App   <-  Cm: AcceptConnectCfm
+
+Client:
+App   -> RfcUtil: CsrBtUtilSdpRfcConInit (with SelectServiceHandleFunc, SetPortParFunc, ConResultFunc)
+App   ->  RfcUtil: CsrBtUtilRfcConStart( with: deviceAddr, sdp rule)
+App   <- RfcUtil: SelectServiceHandleFunc
+App   <- RfcUtil: SetPortParFunc
+-->
+
+    <method name="ActivateReq">
+        <!-- Allocates a server channel -->
+        <arg name="rfcommCh" type="y" direction="in" />
+        <arg name="serverId" type="q" direction="out" />
+    </method>
+
+    <signal name="ActivateCfm">
+        <arg name="serverId" type="q" direction="out" />
+        <arg name="serverChannel" type="q" direction="out" />
+        <arg name="resultCode" type="q" direction="out" />
+        <arg name="resultSupplier" type="q" direction="out" />
+    </signal>
+
+
+    <method name="DeactivateReq">
+        <!--
+        De-allocates a server channel
+        only if there are no connections and no sdp record.
+        No DeactivateCfm signal is used.
+        -->
+        <arg name="serverId" type="q" direction="in" />
+        <arg name="success" type="b" direction="out" />
+    </method>
+
+    <!-- SDP PORTION -->
+
+    <method name="RegisterSdpReq">
+        <!-- Registers an sdp record -->
+        <arg name="serverId" type="q" direction="in" />
+        <arg name="uuid" type="ay" direction="in" />
+        <arg name="name" type="s" direction="in" />
+    </method>
+
+    <method name="RegisterSdpSppReq">
+        <!-- convenience for creating an spp record -->
+        <arg name="serverId" type="q" direction="in" />
+        <arg name="name" type="s" direction="in" />
+    </method>
+
+    <method name="RegisterSdpObexPushReq">
+         <!-- convenience for creating an spp record -->
+        <arg name="serverId" type="q" direction="in" />
+        <arg name="name" type="s" direction="in" />
+    </method>
+
+    <signal name="RegisterSdpCfm">
+        <arg name="serverId" type="q" direction="out" />
+        <arg name="resultCode" type="q" direction="out"/>
+        <arg name="resultSupplier" type="q" direction="out"/>
+    </signal>
+
+    <method name="UnregisterSdpReq">
+        <arg name="serverId" type="q" direction="in" />
+    </method>
+
+    <signal name="UnregisterSdpCfm">
+        <arg name="serverId" type="q" direction="out" />
+        <arg name="resultCode" type="q" direction="out"/>
+        <arg name="resultSupplier" type="q" direction="out"/>
+    </signal>
+
+    <!-- Connection portion -->
+    <method name="ConnectReq">
+        <arg name="deviceAddr" type="s" direction="in"/>
+        <arg name="uuid" type="ay" direction="in" />
+        <arg name="dataUrl" type="s" direction="in" />
+        <arg name="mtu" type="q"  direction="in" />
+        <arg name="securityLevel" type="q" direction="in"  />
+        <arg name="modemStatus" type="y"  direction="in" />
+        <arg name="mscTimeout" type="y"  direction="in" />
+        <arg name="connId" type="q" direction="out" />
+    </method>
+
+    <signal name="ConnectCfm">
+        <arg name="connId" type="q" direction="out" />
+        <arg name="deviceAddr" type="s" direction="out" />
+        <arg name="serverChannel" type="y" direction="out" />
+        <arg name="maxFrameSize" type="q" direction="out" />
+        <arg name="resultCode" type="q" direction="out" />
+        <arg name="resultSupplier" type="q" direction="out" />
+    </signal>
+
+    <method name="AcceptConnectReq">
+        <!-- Start accepting connections on this server -->
+        <arg name="serverId" type="q" direction="in" />
+        <arg name="cod" type="u" direction="in" /> <!-- 24bit -->
+        <arg name="maxFrameSize" type="q"  direction="in" />
+        <arg name="securityLevel" type="q" direction="in"  />
+        <arg name="modemStatus" type="y"  direction="in" />
+        <arg name="breakSignal" type="y"  direction="in" />
+        <arg name="mscTimeout" type="y"  direction="in" />
+    </method>
+
+    <method name="AcceptConnectCancelReq">
+        <arg name="serverId" type="q" direction="in" />
+    </method>
+
+    <signal name="AcceptConnectCancelCfm">
+        <arg name="serverId" type="q"  direction="out" />
+        <arg name="resultCode" type="q" direction="out" />
+        <arg name="resultSupplier" type="q" direction="out" />
+    </signal>
+
+    <signal name="ConnectInd">
+        <!-- A new connection from peer, ConnectRes must be called  -->
+        <arg name="serverId" type="q" direction="out" />
+        <arg name="connId" type="q" direction="out" />
+        <arg name="deviceAddr" type="s" direction="out" />
+        <arg name="serverChannel" type="y" direction="out" />
+        <arg name="maxFrameSize" type="q" direction="out" />
+    </signal>
+
+    <method name="ConnectRes">
+        <arg name="connId" type="q" direction="in" />
+        <arg name="dataUrl" type="s" direction="in" />
+    </method>
+
+    <signal name="AcceptConnectCfm">
+        <arg name="serverId" type="q" direction="out" />
+        <arg name="connId" type="q" direction="out" />
+        <arg name="resultCode" type="q" direction="out"/>
+        <arg name="resultSupplier" type="q" direction="out"/>
+    </signal>
+
+    <!-- This is sent in three different cases
+        - remote bluetooth device disconnects
+        - application requested disconnect using DisconnectReq
+        - socket was closed which caused rfcommp to call DisconnectReq
+     -->
+    <signal name="DisconnectInd">
+        <arg name="connId" type="q" direction="out" />
+        <arg name="localTerminated" type="b" direction="out" />
+        <arg name="reasonCode" type="q" direction="out" />
+        <arg name="reasonSupplier" type="q" direction="out" />
+    </signal>
+
+    <signal name="PortStatusInd">
+        <arg name="connId" type="q" direction="out" />
+        <arg name="modemStatus" type="y" direction="out" />
+        <arg name="breakSignal" type="y" direction="out" />
+    </signal>
+
+    <method name="DisconnectReq">
+        <arg name="connId" type="q" direction="in" />
+    </method>
+
+
+<!--
+    <method name="CancelConnectReq">
+        <arg name="connId" type="q" direction="in" />
+    </method>
+
+    <method name="PortStatusReq">
+        <arg name="connId" type="q" direction="in" />
+        <arg name="modemStatus" type="y" direction="in" />
+        <arg name="breakSignal" type="y" direction="in" />
+    </method>
+
+
+    <method name="PortNegotiationReq">
+        <arg name="connId" type="q" direction="in" />
+        <arg name="isRequest" type="b" direction="in" />
+
+        <arg name="baudRate" type="y" direction="in" />
+        <arg name="dataBits" type="y" direction="in" />
+        <arg name="stopBits" type="y" direction="in" />
+        <arg name="parity" type="b" direction="in" />
+        <arg name="parityType" type="y" direction="in" />
+        <arg name="flowControl" type="y" direction="in" />
+        <arg name="xon" type="y" direction="in" />
+        <arg name="xoff" type="y" direction="in" />
+        <arg name="parameterMask" type="q" direction="in" />
+    </method>
+
+    <signal name="PortNegotiationInd">
+        <arg name="connId" type="q" direction="out" />
+        <arg name="isRequest" type="b" direction="out" />
+
+        <arg name="baudRate" type="y" direction="out" />
+        <arg name="dataBits" type="y" direction="out" />
+        <arg name="stopBits" type="y" direction="out" />
+        <arg name="parity" type="b" direction="out" />
+        <arg name="parityType" type="y" direction="out" />
+        <arg name="flowControl" type="y" direction="out" />
+        <arg name="xon" type="y" direction="out" />
+        <arg name="xoff" type="y" direction="out" />
+        <arg name="parameterMask" type="q" direction="out" />
+    </signal>
+-->
+
+</interface></node>

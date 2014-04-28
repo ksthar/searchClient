@@ -1,0 +1,570 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN" "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<node>
+<interface name="com.bluegiga.v2.bt.hdp">
+<!-- signal: RegisterCfm
+#ifdef INC_RegisterCfm
+-->
+	<signal name="RegisterCfm">
+	<arg name="resultCode" type="q" /> <!-- BtResultCode -->
+	<arg name="resultSupplier" type="q" /> <!-- BtSupplier -->
+</signal>
+
+<!--
+#endif
+-->
+
+<!-- signal: RegisterInd
+#ifdef INC_RegisterInd
+-->
+	<signal name="RegisterInd">
+        <arg name="mdepId" type="y" /> <!-- BtMdepId -->
+</signal>
+
+
+<!--
+#endif
+-->
+
+<!-- signal: ActivateCfm
+#ifdef INC_ActivateCfm
+-->
+	<signal name="ActivateCfm">
+	<arg name="resultCode" type="q" /> <!-- BtResultCode -->
+	<arg name="resultSupplier" type="q" /> <!-- BtSupplier -->
+</signal>
+
+<!--
+#endif
+-->
+
+<!-- signal: ConnectVirtualChannelCfm
+#ifdef INC_ConnectVirtualChannelCfm
+-->
+	<signal name="ConnectVirtualChannelCfm">
+	<arg name="assocChannelId" type="u" /> <!-- Uint32 -->
+	<arg name="virtualChannelId" type="u" /> <!-- Uint32 -->
+	<arg name="maxPacketLength" type="q" /> <!-- Uint16 -->
+	<arg name="resultCode" type="q" /> <!-- BtResultCode -->
+	<arg name="resultSupplier" type="q" /> <!-- BtSupplier -->
+</signal>
+
+<!--
+#endif
+-->
+
+<!-- signal: AcceptConnectVirtualChannelInd
+#ifdef INC_AcceptConnectVirtualChannelInd
+-->
+	<signal name="AcceptConnectVirtualChannelInd">
+	<arg name="assocChannelId" type="u" /> <!-- Uint32 -->
+	<arg name="virtualChannelId" type="u" /> <!-- Uint32 -->
+	<arg name="virtualChannelConfig" type="y" /> <!-- Uint8 -->
+</signal>
+
+<!--
+#endif
+-->
+
+<!-- signal: ConnectVirtualChannelInd
+#ifdef INC_ConnectVirtualChannelInd
+-->
+	<signal name="ConnectVirtualChannelInd">
+	<arg name="assocChannelId" type="u" /> <!-- Uint32 -->
+	<arg name="virtualChannelId" type="u" /> <!-- Uint32 -->
+	<arg name="maxPacketLength" type="q" /> <!-- Uint16 -->
+	<arg name="resultCode" type="q" /> <!-- BtResultCode -->
+	<arg name="resultSupplier" type="q" /> <!-- BtSupplier -->
+</signal>
+
+<!--
+#endif
+-->
+
+<!-- signal: DeactivateCfm
+#ifdef INC_DeactivateCfm
+-->
+	<signal name="DeactivateCfm">
+	<arg name="resultCode" type="q" /> <!-- BtResultCode -->
+	<arg name="resultSupplier" type="q" /> <!-- BtSupplier -->
+</signal>
+
+<!--
+#endif
+-->
+
+<!-- signal: ConnectAssociateChannelCfm
+#ifdef INC_ConnectAssociateChannelCfm
+-->
+	<signal name="ConnectAssociateChannelCfm">
+	<arg name="hdpInstanceId" type="u" /> <!-- Uint32 -->
+	<arg name="deviceAddr" type="s" /> <!-- BtDeviceAddr -->
+	<arg name="mdepId" type="y" /> <!-- BtMdepId -->
+	<arg name="mdepDataType" type="q" /> <!-- BtMdepDataType -->
+	<arg name="assocChannelId" type="u" /> <!-- Uint32 -->
+	<arg name="maxPacketLength" type="q" /> <!-- Uint16 -->
+	<arg name="resultCode" type="q" /> <!-- BtResultCode -->
+	<arg name="resultSupplier" type="q" /> <!-- BtSupplier -->
+</signal>
+
+<!--
+#endif
+-->
+
+<!-- signal: ConnectAssociateChannelInd
+#ifdef INC_ConnectAssociateChannelInd
+-->
+	<signal name="ConnectAssociateChannelInd">
+	<arg name="hdpInstanceId" type="u" /> <!-- Uint32 -->
+	<arg name="deviceAddr" type="s" /> <!-- BtDeviceAddr -->
+	<arg name="mdepId" type="y" /> <!-- BtMdepId -->
+	<arg name="mdepDataType" type="q" /> <!-- BtMdepDataType -->
+	<arg name="assocChannelId" type="u" /> <!-- Uint32 -->
+	<arg name="maxPacketLength" type="q" /> <!-- Uint16 -->
+	<arg name="resultCode" type="q" /> <!-- BtResultCode -->
+	<arg name="resultSupplier" type="q" /> <!-- BtSupplier -->
+</signal>
+
+<!--
+#endif
+-->
+
+<!-- signal: AcceptConnectAssociateChannelInd
+#ifdef INC_AcceptConnectAssociateChannelInd
+-->
+	<signal name="AcceptConnectAssociateChannelInd">
+	<arg name="deviceAddr" type="s" /> <!-- BtDeviceAddr -->
+	<arg name="mdepId" type="y" /> <!-- BtMdepId -->
+	<arg name="assocChannelId" type="u" /> <!-- Uint32 -->
+</signal>
+
+<!-- Retrives the capablities supported by the peer. -->
+<!--
+#endif
+-->
+
+<!-- method: GetCapabilitiesReq
+#ifdef INC_GetCapabilitiesReq
+-->
+	<method name="GetCapabilitiesReq">
+	<arg name="phandle" type="q" direction="in" />
+	<arg name="remoteDevAddr" type="s" direction="in" />
+	<arg name="mdepmask" type="y" direction="in" />
+	<arg name="conditionmask" type="y" direction="in" />
+	<arg name="rolemask" type="y" direction="in" />
+</method>
+
+<!--
+#endif
+-->
+
+<!-- signal: GetCapabilitiesInd
+#ifdef INC_GetCapabilitiesInd
+-->
+	<signal name="GetCapabilitiesInd">
+	<arg name="deviceAddr" type="s" />
+	<arg name="hdpInstanceId" type="u" /> 
+	<arg name="serviceName" type="s" /> 
+	<arg name="serviceDescrip" type="s" /> 
+	<arg name="providerName" type="s" /> 
+	<arg name="dataexchangeSpecification" type="y" /> 
+	<arg name="supportedProcedures" type="y" /> 
+
+	<!--
+	typedef struct
+	{
+	  BtMdepId       id;
+	  BtMdepDataType dataType;
+	  BtMdepRole     role;
+	  BtDeviceName    description;
+	} BtHdpMdep; -->
+	<arg name="supportedFeatureList" type="a(yqys)" /> <!-- BtHdpMdep* -->
+</signal>
+
+<!--
+#endif
+-->
+
+<!-- signal: GetCapabilitiesCfm
+#ifdef INC_GetCapabilitiesCfm
+-->
+	<signal name="GetCapabilitiesCfm">
+	<arg name="resultCode" type="q" /> <!-- BtResultCode -->
+	<arg name="resultSupplier" type="q" /> <!-- BtSupplier -->
+	<arg name="deviceAddr" type="s" /> 
+</signal>
+
+<!--
+#endif
+-->
+
+<!-- signal: UnregisterCfm
+#ifdef INC_UnregisterCfm
+-->
+	<signal name="UnregisterCfm">
+	<arg name="resultCode" type="q" /> <!-- BtResultCode -->
+	<arg name="resultSupplier" type="q" /> <!-- BtSupplier -->
+</signal>
+
+<!--
+#endif
+-->
+
+<!-- signal: DisconnectAssociateChannelInd
+#ifdef INC_DisconnectAssociateChannelInd
+-->
+	<signal name="DisconnectAssociateChannelInd">
+	<arg name="assocChId" type="u" /> <!-- Uint32 -->
+	<arg name="resultCode" type="q" /> <!-- BtResultCode -->
+	<arg name="resultSupplier" type="q" /> <!-- BtSupplier -->
+</signal>
+
+<!--
+#endif
+-->
+
+<!-- signal: DisconnectAssociateChannelCfm
+#ifdef INC_DisconnectAssociateChannelCfm
+-->
+	<signal name="DisconnectAssociateChannelCfm">
+	<arg name="assocChId" type="u" /> <!-- Uint32 -->
+	<arg name="resultCode" type="q" /> <!-- BtResultCode -->
+	<arg name="resultSupplier" type="q" /> <!-- BtSupplier -->
+</signal>
+
+<!--
+#endif
+-->
+
+<!-- signal: DisconnectVirtualChannelCfm
+#ifdef INC_DisconnectVirtualChannelCfm
+-->
+	<signal name="DisconnectVirtualChannelCfm">
+	<arg name="virtualChId" type="u" /> <!-- Uint32 -->
+	<arg name="resultCode" type="q" /> <!-- BtResultCode -->
+	<arg name="resultSupplier" type="q" /> <!-- BtSupplier -->
+</signal>
+
+<!--
+#endif
+-->
+
+<!-- signal: DisconnectVirtualChannelInd
+#ifdef INC_DisconnectVirtualChannelInd
+-->
+	<signal name="DisconnectVirtualChannelInd">
+	<arg name="virtualChId" type="u" /> <!-- Uint32 -->
+	<arg name="resultCode" type="q" /> <!-- BtResultCode -->
+	<arg name="resultSupplier" type="q" /> <!-- BtSupplier -->
+</signal>
+
+<!--
+#endif
+-->
+
+<!-- signal: DataInd
+#ifdef INC_DataInd
+-->
+	<signal name="DataInd">
+	<arg name="assocChId" type="u" /> <!-- Uint32 -->
+	<!-- <arg name="length" type="q" /> --> <!-- Uint16 -->
+	<arg name="data" type="ay" /> <!-- void pointer -->
+</signal>
+
+<!--
+#endif
+-->
+
+<!-- signal: DataInd
+#ifdef INC_DataInd
+-->
+<signal name="TransportDisconnectInd">
+	<arg name="chId" type="u" />
+</signal>
+<!--
+#endif
+-->
+
+
+<!-- signal: DataCfm
+#ifdef INC_DataCfm
+-->
+	<signal name="DataCfm">
+	<arg name="assocChId" type="u" />
+	<arg name="resultCode" type="q" /> <!-- BtResultCode -->
+	<arg name="resultSupplier" type="q" /> <!-- BtSupplier -->
+</signal>
+
+<!--
+#endif
+-->
+
+<!-- signal: SuspendCfm
+#ifdef INC_SuspendCfm
+-->
+	<signal name="SuspendCfm">
+	<arg name="assocChId" type="u" /> <!-- Uint32 -->
+	<arg name="resultCode" type="q" /> <!-- BtResultCode -->
+	<arg name="resultSupplier" type="q" /> <!-- BtSupplier -->
+</signal>
+
+<!--
+#endif
+-->
+
+<!-- signal: ResumeCfm
+#ifdef INC_ResumeCfm
+-->
+	<signal name="ResumeCfm">
+	<arg name="assocChId" type="u" /> <!-- Uint32 -->
+	<arg name="deviceAddr" type="s" />
+	<arg name="resultCode" type="q" /> <!-- BtResultCode -->
+	<arg name="resultSupplier" type="q" /> <!-- BtSupplier -->
+</signal>
+
+<!--
+#endif
+-->
+
+<!-- signal: ResumeInd
+#ifdef INC_ResumeInd
+-->
+	<signal name="ResumeInd">
+	<arg name="chId" type="u" /> <!-- Uint32 -->
+	<arg name="oldChId" type="u" /> <!-- Uint32 -->
+	<arg name="deviceAddr" type="s" />
+	<arg name="resultCode" type="q" /> <!-- BtResultCode -->
+	<arg name="resultSupplier" type="q" /> <!-- BtSupplier -->
+</signal>
+
+<!-- Registers the service record with SDP -->
+<!--
+#endif
+-->
+
+<!-- method: RegisterReq
+#ifdef INC_RegisterReq
+-->
+	<method name="RegisterReq">
+	<arg name="appHandle" type="q" direction="in" /> <!-- handle of the ctrl application  -->
+	<arg name="secLevel" type="q" direction="in" /> <!-- security level of the device being activated  -->
+	<arg name="serviceName" type="s" direction="in" /> <!-- name of the service ...upto 200 characters  -->
+	<arg name="serviceDescription" type="s" direction="in" /> <!-- brief description of the service ...
+                                                   upto 200 characters  -->
+	<arg name="providerName" type="s" direction="in" /> <!-- organsiation providing the service  -->
+	<!-- <arg name="dataExchangeSpecification" type="y" direction="in" /> --> <!-- byte mask - Data Exchange Protocol  -->
+	<arg name="sniffTimeOut" type="u" direction="in" /> <!-- Time (in ms) the MCL must be idle before requesting sniff  -->
+	<arg name="numOfMdep" type="y" direction="in" /> <!-- number of End Points  -->
+	<arg name="supportedProcedures" type="y" direction="in" /> <!-- byte mask - MCAP procedures supported by HDP  -->
+</method>
+
+<!-- Populates the Supported Features in the service record  -->
+<!--
+#endif
+-->
+
+<!-- method: RegisterRsp
+#ifdef INC_RegisterRsp
+-->
+	<method name="RegisterRsp">
+	<arg name="appHandle" type="q" direction="in" /> <!-- Qid, < handle of the ctrl application  -->
+	<arg name="datatype" type="q" direction="in" /> <!-- BtMdepDataType -->
+	<arg name="role" type="y" direction="in" /> <!-- BtMdepRole -->
+	<arg name="description" type="s" direction="in" /> <!-- mdep information  -->
+	<arg name="reuseMdepId" type="b" direction="in" /> <!-- offer device service on the same end-point -->
+</method>
+
+<!-- Makes the device connectable -->
+<!--
+#endif
+-->
+
+<!-- method: ActivateReq
+#ifdef INC_ActivateReq
+-->
+	<method name="ActivateReq">
+	<arg name="appHandle" type="q" direction="in" /> <!-- Qid -->
+	<arg name="noOfConnections" type="y" direction="in" /> <!-- Uint8 -->
+</method>
+
+<!-- Retrives the capablities supported by the peer.. -->
+<!--
+#endif
+-->
+
+<!-- method: ConnectAssociateChannelReq
+#ifdef INC_ConnectAssociateChannelReq
+-->
+	<method name="ConnectAssociateChannelReq">
+	<arg name="appHandle" type="q" direction="in" /> <!-- Qid -->
+	<arg name="hostname" type="s" direction="in" /> <!-- where to open data socket -->
+	<arg name="port" type="u" direction="in" /> <!-- see above -->
+	<arg name="hdpInstanceId" type="u" direction="in" /> <!-- Uint32 -->
+	<arg name="deviceAddr" type="s" direction="in" /> <!-- BtDeviceAddr -->
+	<arg name="mdepId" type="y" direction="in" /> <!-- BtMdepId -->
+	<arg name="mdepDataType" type="q" direction="in" /> <!-- Uint16 -->
+	<arg name="mdepRole" type="y" direction="in" /> <!-- Uint8 -->
+	<arg name="maxPacketLength" type="q" direction="in" /> <!-- Uint16 -->
+</method>
+
+<!-- Retrives the capablities supported by the peer.. -->
+<!--
+#endif
+-->
+
+<!-- method: AcceptConnectAssociateChannelRes
+#ifdef INC_AcceptConnectAssociateChannelRes
+-->
+	<method name="AcceptConnectAssociateChannelRes">
+	<arg name="appHandle" type="q" direction="in" /> <!-- Qid -->
+        <arg name="hostname" type="s" direction="in" /> <!-- where to open data socket -->
+        <arg name="port" type="u" direction="in" /> <!-- see above -->
+	<arg name="responseCode" type="y" direction="in" /> <!-- Uint8 -->
+	<arg name="mtu" type="q" direction="in" /> <!-- l2ca_mtu_t -->
+	<arg name="assocChannelId" type="u" direction="in" /> <!-- Uint32 -->
+</method>
+
+<!-- Connects virtual channel -->
+<!--
+#endif
+-->
+
+<!-- method: ConnectVirtualChannelReq
+#ifdef INC_ConnectVirtualChannelReq
+-->
+	<method name="ConnectVirtualChannelReq">
+	<arg name="appHandle" type="q" direction="in" /> <!-- Qid -->
+	<arg name="hostname" type="s" direction="in" /> <!-- where to open data socket -->
+	<arg name="port" type="u" direction="in" /> <!-- see above -->
+	<arg name="assocChannelId" type="u" direction="in" /> <!-- Uint32 -->
+	<arg name="virtualChannelConfig" type="y" direction="in" /> <!-- Uint8 -->
+	<arg name="maxPacketLength" type="q" direction="in" /> <!-- Uint16 -->
+</method>
+
+
+<!-- Connects a virtual channel connection request from the peer -->
+<!--
+#endif
+-->
+
+<!-- method: AcceptConnectVirtualChannelRes
+#ifdef INC_AcceptConnectVirtualChannelRes
+-->
+	<method name="AcceptConnectVirtualChannelRes">
+	<arg name="appHandle" type="q" direction="in" /> <!-- Qid -->
+	<arg name="assocChannelId" type="u" direction="in" />
+	<arg name="virtualChannelId" type="u" direction="in" /> <!-- Uint32 -->
+	<arg name="maxPacketLength" type="q" direction="in" /> <!-- Uint16 -->
+	<arg name="virtualChannelConfig" type="y" direction="in" /> <!-- Uint8 -->
+	<arg name="responseCode" type="y" direction="in" /> <!-- Uint8 -->
+</method>
+
+<!--
+#endif
+-->
+
+<!-- method: UnregisterReq
+#ifdef INC_UnregisterReq
+-->
+	<method name="UnregisterReq">
+	<arg name="appHandle" type="q" direction="in" /> <!-- Qid -->
+</method>
+
+<!-- Deactivates the HDP profile -->
+<!--
+#endif
+-->
+
+<!-- method: DeactivateReq
+#ifdef INC_DeactivateReq
+-->
+	<method name="DeactivateReq">
+	<arg name="appHandle" type="q" direction="in" /> <!-- Qid -->
+</method>
+
+<!-- Disconnects the associate channel and all the data channels. -->
+<!--
+#endif
+-->
+
+<!-- method: DisconnectAssociateChannelReq
+#ifdef INC_DisconnectAssociateChannelReq
+-->
+	<method name="DisconnectAssociateChannelReq">
+	<arg name="appHandle" type="q" direction="in" /> <!-- Qid -->
+	<arg name="assocChId" type="u" direction="in" /> <!-- Uint32 -->
+</method>
+
+<!-- Disconnects the associate channel and all the data channels. -->
+<!--
+#endif
+-->
+
+<!-- method: DisconnectVirtualChannelReq
+#ifdef INC_DisconnectVirtualChannelReq
+-->
+	<method name="DisconnectVirtualChannelReq">
+	<arg name="appHandle" type="q" direction="in" /> <!-- Qid -->
+	<arg name="virtualChId" type="u" direction="in" /> <!-- Uint32 -->
+</method>
+
+<!-- Send data. -->
+<!--
+#endif
+-->
+
+<!-- method: DataReq
+#ifdef INC_DataReq
+-->
+	<method name="DataReq">
+	<arg name="appHandle" type="q" direction="in" /> <!-- Qid -->
+	<arg name="chId" type="u" direction="in" /> <!-- Uint32 -->
+	<!-- <arg name="dataLen" type="q" direction="in" /> --> <!-- Uint16 -->
+	<arg name="data" type="ay" direction="in" /> <!-- void pointer -->
+</method>
+
+<!-- Resumes the endpoint -->
+<!--
+#endif
+-->
+
+<!-- method: SuspendReq
+#ifdef INC_SuspendReq
+-->
+	<method name="SuspendReq">
+	<arg name="appHandle" type="q" direction="in" /> <!-- Qid -->
+	<arg name="assocChId" type="u" direction="in" /> <!-- Uint32 -->
+</method>
+
+<!--
+#endif
+-->
+
+<!-- method: ResumeReq
+#ifdef INC_ResumeReq
+-->
+	<method name="ResumeReq">
+	<arg name="appHandle" type="q" direction="in" /> <!-- Qid -->
+	<arg name="assocChId" type="u" direction="in" /> <!-- Uint32 -->
+</method>
+
+
+<!--
+#endif
+-->
+
+<!-- method: ResumeRes
+#ifdef INC_ResumeRes
+-->
+	<method name="ResumeRes">
+        <arg name="appHandle" type="q" direction="in" /> <!-- Qid -->
+        <arg name="chId" type="u" direction="in" /> <!-- Uint32 -->
+	<arg name="resume" type="b" direction="in" />
+</method>
+<!--
+#endif
+-->
+
+
+</interface>
+</node>
+

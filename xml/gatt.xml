@@ -1,0 +1,1498 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN" "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<node><interface name="com.bluegiga.v2.bt.gatt">
+<!-- signal: CentralCfm
+#ifdef INC_CentralCfm
+-->
+	<signal name="CentralCfm">
+		<arg name="gattId" type="u"/>
+		<arg name="btConnId" type="u" /> <!--  Connection identifier  -->
+		<arg name="resultCode" type="q" /> <!--  Result code  -->
+		<arg name="resultSupplier" type="q" /> <!--  Result error code supplier  -->
+	</signal>
+<!--
+#endif
+-->
+
+<!-- signal: PeripheralCfm
+#ifdef INC_PeripheralCfm
+-->
+	<signal name="PeripheralCfm">
+		<arg name="gattId" type="u"/>
+		<arg name="btConnId" type="u" /> <!--  Connection identifier  -->
+		<arg name="resultCode" type="q" /> <!--  Result code  -->
+		<arg name="resultSupplier" type="q" /> <!--  Result error code supplier  -->
+	</signal>
+<!--
+#endif
+-->
+
+<!-- signal: BredrConnectCfm
+#ifdef INC_BredrConnectCfm
+-->
+	<signal name="BredrConnectCfm">
+		<arg name="gattId" type="u"/>
+		<arg name="btConnId" type="u" /> <!--  Connection identifier  -->
+		<arg name="resultCode" type="q" /> <!--  Result code  -->
+		<arg name="resultSupplier" type="q" /> <!--  Result error code supplier  -->
+	</signal>
+<!--
+#endif
+-->
+
+<!-- signal: BredrAcceptCfm
+#ifdef INC_BredrAcceptCfm
+-->
+	<signal name="BredrAcceptCfm">
+		<arg name="gattId" type="u"/>
+		<arg name="btConnId" type="u" /> <!--  Connection identifier  -->
+		<arg name="resultCode" type="q" /> <!--  Result code  -->
+		<arg name="resultSupplier" type="q" /> <!--  Result error code supplier  -->
+	</signal>
+<!--
+#endif
+-->
+
+<!-- signal: ConnectInd
+#ifdef INC_ConnectInd
+-->
+	<signal name="ConnectInd">
+		<arg name="gattId" type="u"/>
+		<arg name="btConnId" type="u" /> <!--  Connection identifier  -->
+		<arg name="resultCode" type="q" /> <!--  Result code  -->
+		<arg name="resultSupplier" type="q" /> <!--  Result error code supplier  -->
+		<arg name="connInfo" type="u" /> <!-- uint32,  Connection info flags (radio type etc.)  -->
+		<arg name="address" type="s" /> <!--  Peer address  -->
+		<arg name="mtu" type="q" /> <!-- uint16,  Maximum packet size  -->
+	</signal>
+<!--
+#endif
+-->
+
+<!-- signal: DisconnectInd
+#ifdef INC_DisconnectInd
+-->
+	<signal name="DisconnectInd">
+		<arg name="gattId" type="u"/>
+		<arg name="btConnId" type="u" /> <!--  Connection identifier  -->
+		<arg name="reasonCode" type="q" /> <!--  Reason code  -->
+		<arg name="reasonSupplier" type="q" /> <!--  Reason code supplier  -->
+		<arg name="address" type="s" /> <!--  Peer address  -->
+		<arg name="connInfo" type="u" /> <!-- uint32,  Connection info flags (radio type etc.)  -->
+	</signal>
+<!--
+#endif
+-->
+
+<!-- signal: ScanCfm
+#ifdef INC_ScanCfm
+-->
+	<signal name="ScanCfm">
+		<arg name="gattId" type="u"/>
+		<arg name="resultCode" type="q" /> <!--  Result code  -->
+		<arg name="resultSupplier" type="q" /> <!--  Result error code supplier  -->
+	</signal>
+<!--
+#endif
+-->
+
+<!-- signal: AdvertiseCfm
+#ifdef INC_AdvertiseCfm
+-->
+	<signal name="AdvertiseCfm">
+		<arg name="gattId" type="u"/>
+		<arg name="resultCode" type="q" /> <!--  Result code  -->
+		<arg name="resultSupplier" type="q" /> <!--  Result error code supplier  -->
+	</signal>
+<!--
+#endif
+-->
+
+<!-- signal: RegisterCfm
+#ifdef INC_RegisterCfm
+-->
+	<signal name="RegisterCfm">
+		<arg name="gattId" type="u"/>
+		<arg name="resultCode" type="q" /> <!--  Result code  -->
+		<arg name="resultSupplier" type="q" /> <!--  Result error code supplier  -->
+		<arg name="context" type="q" /> <!-- uint16,  Value returned from RegisterReq  -->
+	</signal>
+<!--
+#endif
+-->
+
+<!-- signal: UnregisterCfm
+#ifdef INC_UnregisterCfm
+-->
+	<signal name="UnregisterCfm">
+		<arg name="gattId" type="u"/>
+		<arg name="resultCode" type="q" /> <!--  Result code  -->
+		<arg name="resultSupplier" type="q" /> <!--  Result error code supplier  -->
+	</signal>
+<!--
+#endif
+-->
+
+<!-- signal: DbAllocCfm
+#ifdef INC_DbAllocCfm
+-->
+	<signal name="DbAllocCfm">
+		<arg name="gattId" type="u"/>
+		<arg name="resultCode" type="q" /> <!--  Result code  -->
+		<arg name="resultSupplier" type="q" /> <!--  Result error code supplier  -->
+		<arg name="start" type="q" /> <!-- uint16,  Start attribute handle  -->
+		<arg name="end" type="q" /> <!-- uint16,  End attribute handle  -->
+		<arg name="preferredStartHandle" type="q" /> <!-- uint16,  The preferredStartHandle given in DbAllocReq  -->
+	</signal>
+<!--
+#endif
+-->
+
+<!-- signal: DbDeallocCfm
+#ifdef INC_DbDeallocCfm
+-->
+	<signal name="DbDeallocCfm">
+		<arg name="gattId" type="u"/>
+		<arg name="resultCode" type="q" /> <!--  Result code  -->
+		<arg name="resultSupplier" type="q" /> <!--  Result error code supplier  -->
+		<arg name="start" type="q" /> <!-- uint16,  Start attribute handle  -->
+		<arg name="end" type="q" /> <!-- uint16,  End attribute handle  -->
+	</signal>
+<!--
+#endif
+-->
+
+<!-- signal: DbAddCfm
+#ifdef INC_DbAddCfm
+-->
+	<signal name="DbAddCfm">
+		<arg name="gattId" type="u"/>
+		<arg name="resultCode" type="q" /> <!--  Result code  -->
+		<arg name="resultSupplier" type="q" /> <!--  Result error code supplier  -->
+	</signal>
+<!--
+#endif
+-->
+
+<!-- signal: DbRemoveCfm
+#ifdef INC_DbRemoveCfm
+-->
+	<signal name="DbRemoveCfm">
+		<arg name="gattId" type="u"/>
+		<arg name="resultCode" type="q" /> <!--  Result code  -->
+		<arg name="resultSupplier" type="q" /> <!--  Result supplier  -->
+		<arg name="numOfAttr" type="q" /> <!-- uint16,  Number of attributes removed  -->
+	</signal>
+<!--
+#endif
+-->
+
+<!-- signal: DbAccessReadInd
+#ifdef INC_DbAccessReadInd
+-->
+	<signal name="DbAccessReadInd">
+		<arg name="gattId" type="u"/>
+		<arg name="btConnId" type="u" /> <!--  Connection identifier  -->
+		<arg name="attrHandle" type="q" /> <!-- uint16,  The handle of the attribute  -->
+		<arg name="offset" type="q" /> <!-- uint16,  The offset of the first octet to be accessed  -->
+		<arg name="maxRspValueLength" type="q" /> <!-- uint16,  The maximum length that the value of the attribute must have  -->
+		<arg name="check" type="q" /> <!-- uint16,  Special conditions that needs to be checked  -->
+		<arg name="connInfo" type="u" /> <!-- uint32,  Connection info flags (radio type etc.)  -->
+		<arg name="address" type="s" /> <!--  Peer address  -->
+	</signal>
+<!--
+#endif
+-->
+
+<!-- signal: DbAccessWriteInd
+#ifdef INC_DbAccessWriteInd
+-->
+	<signal name="DbAccessWriteInd">
+		<arg name="gattId" type="u"/>
+		<arg name="btConnId" type="u" /> <!--  Connection identifier  -->
+		<arg name="check" type="q" /> <!-- uint16,  Special conditions that needs to be checked  -->
+		<arg name="connInfo" type="u" /> <!-- uint32,  Connection info flags (radio type etc.)  -->
+		<arg name="address" type="s" /> <!--  Peer address  -->
+		<arg name="writeUnit" type="a(qay)" /> <!--  Array of sub-write units. Only offset/value/valueLength should be used.  -->
+		<arg name="attrHandle" type="q" /> <!-- uint16,  The handle of the attribute. Return this handle in the AccessRes.  -->
+	</signal>
+<!--
+#endif
+-->
+
+<!-- signal: DbAccessCompleteInd
+#ifdef INC_DbAccessCompleteInd
+-->
+	<signal name="DbAccessCompleteInd">
+		<arg name="gattId" type="u"/>
+		<arg name="btConnId" type="u" /> <!--  Connection identifier  -->
+		<arg name="connInfo" type="u" /> <!-- uint32,  Connection info flags (radio type etc.)  -->
+		<arg name="address" type="s" /> <!--  Peer address  -->
+		<arg name="attrHandle" type="q" /> <!-- uint16,  The handle of the attribute  -->
+		<arg name="commit" type="b" /> <!-- boolean,  True only if all prepare writes succedeed  -->
+	</signal>
+<!--
+#endif
+-->
+
+<!-- signal: EventSendCfm
+#ifdef INC_EventSendCfm
+-->
+	<signal name="EventSendCfm">
+		<arg name="gattId" type="u"/>
+		<arg name="resultCode" type="q" /> <!--  Result code  -->
+		<arg name="resultSupplier" type="q" /> <!--  Result error code supplier  -->
+		<arg name="btConnId" type="u" /> <!--  Connection identifier  -->
+	</signal>
+<!--
+#endif
+-->
+
+<!-- signal: MtuChangedInd
+#ifdef INC_MtuChangedInd
+-->
+	<signal name="MtuChangedInd">
+		<arg name="gattId" type="u"/>
+		<arg name="btConnId" type="u" /> <!--  Connection identifier  -->
+		<arg name="mtu" type="q" /> <!-- uint16,  MTU for the connection  -->
+	</signal>
+<!--
+#endif
+-->
+
+<!-- signal: DiscoverServicesInd
+#ifdef INC_DiscoverServicesInd
+-->
+	<signal name="DiscoverServicesInd">
+		<arg name="gattId" type="u"/>
+		<arg name="btConnId" type="u" /> <!--  Connection identifier  -->
+		<arg name="startHandle" type="q" /> <!-- uint16,  Start handle  -->
+		<arg name="endHandle" type="q" /> <!-- uint16,  The End Group handle  -->
+		<arg name="uuid" type="ay" /> <!--  The Service UUID  -->
+	</signal>
+<!--
+#endif
+-->
+
+<!-- signal: DiscoverServicesCfm
+#ifdef INC_DiscoverServicesCfm
+-->
+	<signal name="DiscoverServicesCfm">
+		<arg name="gattId" type="u"/>
+		<arg name="resultCode" type="q" /> <!--  Result code  -->
+		<arg name="resultSupplier" type="q" /> <!--  Result error code supplier  -->
+		<arg name="btConnId" type="u" /> <!--  Connection identifier  -->
+	</signal>
+<!--
+#endif
+-->
+
+<!-- signal: FindInclServicesInd
+#ifdef INC_FindInclServicesInd
+-->
+	<signal name="FindInclServicesInd">
+		<arg name="gattId" type="u"/>
+		<arg name="btConnId" type="u" /> <!--  connection identifier  -->
+		<arg name="attrHandle" type="q" /> <!-- uint16,  Attribute Handle of the Include Service  -->
+		<arg name="startHandle" type="q" /> <!-- uint16,  Starting Handle of the Included Service declaration  -->
+		<arg name="endGroupHandle" type="q" /> <!-- uint16,  The End Group handle  -->
+		<arg name="uuid" type="ay" /> <!--  The Service UUID  -->
+	</signal>
+<!--
+#endif
+-->
+
+<!-- signal: FindInclServicesCfm
+#ifdef INC_FindInclServicesCfm
+-->
+	<signal name="FindInclServicesCfm">
+		<arg name="gattId" type="u"/>
+		<arg name="resultCode" type="q" /> <!--  Result code  -->
+		<arg name="resultSupplier" type="q" /> <!--  Result error code supplier  -->
+		<arg name="btConnId" type="u" /> <!--  Connection identifier  -->
+	</signal>
+<!--
+#endif
+-->
+
+<!-- signal: DiscoverCharacInd
+#ifdef INC_DiscoverCharacInd
+-->
+	<signal name="DiscoverCharacInd">
+		<arg name="gattId" type="u"/>
+		<arg name="btConnId" type="u" /> <!--  Connection identifier  -->
+		<arg name="declarationHandle" type="q" /> <!-- uint16,  Handle for the characteristic declaration -->
+		<arg name="property" type="y" /> <!-- uint8,  Characteristic Property  -->
+		<arg name="uuid" type="ay" /> <!--  Characteristic UUID  -->
+		<arg name="valueHandle" type="q" /> <!-- uint16,  Characteristic Value Handle  -->
+	</signal>
+<!--
+#endif
+-->
+
+<!-- signal: DiscoverCharacCfm
+#ifdef INC_DiscoverCharacCfm
+-->
+	<signal name="DiscoverCharacCfm">
+		<arg name="gattId" type="u"/>
+		<arg name="resultCode" type="q" /> <!--  Result code  -->
+		<arg name="resultSupplier" type="q" /> <!--  Result error code supplier  -->
+		<arg name="btConnId" type="u" /> <!--  Connection identifier  -->
+	</signal>
+<!--
+#endif
+-->
+
+<!-- signal: DiscoverCharacDescriptorsInd
+#ifdef INC_DiscoverCharacDescriptorsInd
+-->
+	<signal name="DiscoverCharacDescriptorsInd">
+		<arg name="gattId" type="u"/>
+		<arg name="btConnId" type="u" /> <!--  Connection identifier  -->
+		<arg name="uuid" type="ay" /> <!--  Characteristic Descriptor UUID  -->
+		<arg name="descriptorHandle" type="q" /> <!-- uint16,  The handle of the Characteristic Descriptor declaration  -->
+	</signal>
+<!--
+#endif
+-->
+
+<!-- signal: DiscoverCharacDescriptorsCfm
+#ifdef INC_DiscoverCharacDescriptorsCfm
+-->
+	<signal name="DiscoverCharacDescriptorsCfm">
+		<arg name="gattId" type="u"/>
+		<arg name="resultCode" type="q" /> <!--  Result code  -->
+		<arg name="resultSupplier" type="q" /> <!--  Result error code supplier  -->
+		<arg name="btConnId" type="u" /> <!--  Connection identifier  -->
+	</signal>
+<!--
+#endif
+-->
+
+<!-- signal: ReadCfm
+#ifdef INC_ReadCfm
+-->
+	<signal name="ReadCfm">
+		<arg name="gattId" type="u"/>
+		<arg name="resultCode" type="q" /> <!--  Result code  -->
+		<arg name="resultSupplier" type="q" /> <!--  Result error code supplier  -->
+		<arg name="btConnId" type="u" /> <!--  Connection identifier  -->
+		<arg name="value" type="ay" /> <!-- byte array,  Pointer to the Characteristic Value  -->
+	</signal>
+<!--
+#endif
+-->
+
+<!-- signal: ReadExtendedPropertiesCfm
+#ifdef INC_ReadExtendedPropertiesCfm
+-->
+	<signal name="ReadExtendedPropertiesCfm">
+		<arg name="gattId" type="u"/>
+		<arg name="resultCode" type="q" /> <!--  Result code  -->
+		<arg name="resultSupplier" type="q" /> <!--  Result error code supplier  -->
+		<arg name="btConnId" type="u" /> <!--  Connection identifier  -->
+		<arg name="extProperties" type="q" /> <!-- uint16,  The Characteristic Extended Properties bit field  -->
+	</signal>
+<!--
+#endif
+-->
+
+<!-- signal: ReadUserDescriptionCfm
+#ifdef INC_ReadUserDescriptionCfm
+-->
+	<signal name="ReadUserDescriptionCfm">
+		<arg name="gattId" type="u"/>
+		<arg name="resultCode" type="q" /> <!--  Result code  -->
+		<arg name="resultSupplier" type="q" /> <!--  Result error code supplier  -->
+		<arg name="btConnId" type="u" /> <!--  Connection identifier  -->
+		<arg name="usrDescription" type="s" /> <!--  Characteristic User Description UTF-8 String  -->
+	</signal>
+<!--
+#endif
+-->
+
+<!-- signal: ReadClientConfigurationCfm
+#ifdef INC_ReadClientConfigurationCfm
+-->
+	<signal name="ReadClientConfigurationCfm">
+		<arg name="gattId" type="u"/>
+		<arg name="resultCode" type="q" /> <!--  Result code  -->
+		<arg name="resultSupplier" type="q" /> <!--  Result error code supplier  -->
+		<arg name="btConnId" type="u" /> <!--  Connection identifier  -->
+		<arg name="configuration" type="q" /> <!-- uint16,  Client Characteristic Configuration bits  -->
+	</signal>
+<!--
+#endif
+-->
+
+<!-- signal: ReadServerConfigurationCfm
+#ifdef INC_ReadServerConfigurationCfm
+-->
+	<signal name="ReadServerConfigurationCfm">
+		<arg name="gattId" type="u"/>
+		<arg name="resultCode" type="q" /> <!--  Result code  -->
+		<arg name="resultSupplier" type="q" /> <!--  Result error code supplier  -->
+		<arg name="btConnId" type="u" /> <!--  Connection identifier  -->
+		<arg name="configuration" type="q" /> <!-- uint16,  Server Characteristic Configuration bits  -->
+	</signal>
+<!--
+#endif
+-->
+
+<!-- signal: ReadPresentationFormatCfm
+#ifdef INC_ReadPresentationFormatCfm
+-->
+	<signal name="ReadPresentationFormatCfm">
+		<arg name="gattId" type="u"/>
+		<arg name="resultCode" type="q" /> <!--  Result code  -->
+		<arg name="resultSupplier" type="q" /> <!--  Result error code supplier  -->
+		<arg name="btConnId" type="u" /> <!--  Connection identifier  -->
+		<arg name="format" type="y" /> <!-- uint8,  Format of the value of this characteristic  -->
+		<arg name="exponent" type="y" /> <!-- uint8,  Exponent field determines how the value is formatted  -->
+		<arg name="unit" type="q" /> <!-- uint16,  The Unit is a UUID defined in the Assigned Numbers Specification  -->
+		<arg name="nameSpace" type="y" /> <!-- uint8,  The Name Space field identify defined in the Assigned Numbers Specification  -->
+		<arg name="description" type="q" /> <!-- uint16,  The Description is an enumerated value as defined in the Assigned Numbers Specification  -->
+	</signal>
+<!--
+#endif
+-->
+
+<!-- signal: ReadAggregateFormatCfm
+#ifdef INC_ReadAggregateFormatCfm
+-->
+	<signal name="ReadAggregateFormatCfm">
+		<arg name="gattId" type="u"/>
+		<arg name="resultCode" type="q" /> <!--  Result code  -->
+		<arg name="resultSupplier" type="q" /> <!--  Result error code supplier  -->
+		<arg name="btConnId" type="u" /> <!--  Connection identifier  -->
+		<arg name="handles" type="aq" /> <!--  List of Attribute Handles for the Characteristic Presentation Format Declarations  -->
+	</signal>
+<!--
+#endif
+-->
+
+<!-- signal: ReadProfileDefinedDescriptorCfm
+#ifdef INC_ReadProfileDefinedDescriptorCfm
+-->
+	<signal name="ReadProfileDefinedDescriptorCfm">
+		<arg name="gattId" type="u"/>
+		<arg name="resultCode" type="q" /> <!--  Result code  -->
+		<arg name="resultSupplier" type="q" /> <!--  Result error code supplier  -->
+		<arg name="btConnId" type="u" /> <!--  Connection identifier  -->
+		<arg name="value" type="ay" /> <!-- byte array,  Pointer to the Characteristic Value  -->
+	</signal>
+<!--
+#endif
+-->
+
+<!-- signal: ReadMultiCfm
+#ifdef INC_ReadMultiCfm
+-->
+	<signal name="ReadMultiCfm">
+		<arg name="gattId" type="u"/>
+		<arg name="resultCode" type="q" /> <!--  Result code  -->
+		<arg name="resultSupplier" type="q" /> <!--  Result error code supplier  -->
+		<arg name="btConnId" type="u" /> <!--  Connection identifier  -->
+		<arg name="value" type="ay" /> <!-- byte array,  Pointer to the Characteristic Value  -->
+	</signal>
+<!--
+#endif
+-->
+
+<!-- signal: ReadByUuidInd
+#ifdef INC_ReadByUuidInd
+-->
+	<signal name="ReadByUuidInd">
+		<arg name="gattId" type="u"/>
+		<arg name="btConnId" type="u" /> <!--  Connection identifier  -->
+		<arg name="valueHandle" type="q" /> <!-- uint16,  Characteristic Value Handle  -->
+		<arg name="value" type="ay" /> <!-- byte array,  Pointer to the Characteristic Value  -->
+	</signal>
+<!--
+#endif
+-->
+
+<!-- signal: ReadByUuidCfm
+#ifdef INC_ReadByUuidCfm
+-->
+	<signal name="ReadByUuidCfm">
+		<arg name="gattId" type="u"/>
+		<arg name="resultCode" type="q" /> <!--  Result code  -->
+		<arg name="resultSupplier" type="q" /> <!--  Result error code supplier  -->
+		<arg name="btConnId" type="u" /> <!--  Connection identifier  -->
+	</signal>
+<!--
+#endif
+-->
+
+<!-- signal: WriteCfm
+#ifdef INC_WriteCfm
+-->
+	<signal name="WriteCfm">
+		<arg name="gattId" type="u"/>
+		<arg name="resultCode" type="q" /> <!--  Result code  -->
+		<arg name="resultSupplier" type="q" /> <!--  Result error code supplier  -->
+		<arg name="btConnId" type="u" /> <!--  Connection identifier  -->
+	</signal>
+<!--
+#endif
+-->
+
+<!-- signal: NotificationInd
+#ifdef INC_NotificationInd
+-->
+	<signal name="NotificationInd">
+		<arg name="gattId" type="u"/>
+		<arg name="btConnId" type="u" /> <!--  Connection identifier  -->
+		<arg name="address" type="s" /> <!--  Peer address  -->
+		<arg name="valueHandle" type="q" /> <!-- uint16,  Attribute Handle of the Characteristic Value  -->
+		<arg name="value" type="ay" />
+		<arg name="connInfo" type="u" /> <!-- uint32,  Connection info flags (radio type etc.)  -->
+	</signal>
+<!--
+#endif
+-->
+
+<!-- signal: ParamScanCfm
+#ifdef INC_ParamScanCfm
+-->
+	<signal name="ParamScanCfm">
+		<arg name="gattId" type="u"/>
+		<arg name="resultCode" type="q" /> <!--  Result code  -->
+		<arg name="resultSupplier" type="q" /> <!--  Result error code supplier  -->
+	</signal>
+<!--
+#endif
+-->
+
+<!-- signal: ParamAdvertiseCfm
+#ifdef INC_ParamAdvertiseCfm
+-->
+	<signal name="ParamAdvertiseCfm">
+		<arg name="gattId" type="u"/>
+		<arg name="resultCode" type="q" /> <!--  Result code  -->
+		<arg name="resultSupplier" type="q" /> <!--  Result error code supplier  -->
+	</signal>
+<!--
+#endif
+-->
+
+<!-- signal: ParamConnectionCfm
+#ifdef INC_ParamConnectionCfm
+-->
+	<signal name="ParamConnectionCfm">
+		<arg name="gattId" type="u"/>
+		<arg name="resultCode" type="q" /> <!--  Result code  -->
+		<arg name="resultSupplier" type="q" /> <!--  Result error code supplier  -->
+	</signal>
+<!--
+#endif
+-->
+
+<!-- signal: ParamConnUpdateCfm
+#ifdef INC_ParamConnUpdateCfm
+-->
+	<signal name="ParamConnUpdateCfm">
+		<arg name="gattId" type="u"/>
+		<arg name="resultCode" type="q" /> <!--  Result code  -->
+		<arg name="resultSupplier" type="q" /> <!--  Result error code supplier  -->
+		<arg name="btConnId" type="u" /> <!--  Connection identifier  -->
+	</signal>
+<!--
+#endif
+-->
+
+<!-- signal: WhitelistAddCfm
+#ifdef INC_WhitelistAddCfm
+-->
+	<signal name="WhitelistAddCfm">
+		<arg name="gattId" type="u"/>
+		<arg name="resultCode" type="q" /> <!--  Result code  -->
+		<arg name="resultSupplier" type="q" /> <!--  Result error code supplier  -->
+	</signal>
+<!--
+#endif
+-->
+
+<!-- signal: WhitelistClearCfm
+#ifdef INC_WhitelistClearCfm
+-->
+	<signal name="WhitelistClearCfm">
+		<arg name="gattId" type="u"/>
+		<arg name="resultCode" type="q" /> <!--  Result code  -->
+		<arg name="resultSupplier" type="q" /> <!--  Result error code supplier  -->
+	</signal>
+<!--
+#endif
+-->
+
+<!-- signal: WhitelistReadCfm
+#ifdef INC_WhitelistReadCfm
+-->
+	<signal name="WhitelistReadCfm">
+		<arg name="gattId" type="u"/>
+		<arg name="address" type="as" /> <!--  Array  -->
+	</signal>
+<!--
+#endif
+-->
+
+<!-- signal: ServiceChangedInd
+#ifdef INC_ServiceChangedInd
+-->
+	<signal name="ServiceChangedInd">
+		<arg name="gattId" type="u"/>
+		<arg name="address" type="s" /> <!--  Peer address  -->
+		<arg name="startHandle" type="q" /> <!-- uint16,  Start of Affected Attribute Handle Range  -->
+		<arg name="endHandle" type="q" /> <!-- uint16,  End of Affected Attribute Handle Range  -->
+		<arg name="connInfo" type="u" /> <!-- uint32,  Connection info flags (radio type etc.)  -->
+	</signal>
+<!--
+#endif
+-->
+
+<!-- signal: SubscriptionCfm
+#ifdef INC_SubscriptionCfm
+-->
+	<signal name="SubscriptionCfm">
+		<arg name="gattId" type="u"/>
+		<arg name="resultCode" type="q" /> <!--  Result code  -->
+		<arg name="resultSupplier" type="q" /> <!--  Result error code supplier  -->
+	</signal>
+<!--
+#endif
+-->
+
+<!-- signal: SetEventMaskCfm
+#ifdef INC_SetEventMaskCfm
+-->
+	<signal name="SetEventMaskCfm">
+		<arg name="gattId" type="u"/>
+		<arg name="resultCode" type="q" /> <!--  Result code  -->
+		<arg name="resultSupplier" type="q" /> <!--  Result error code supplier  -->
+	</signal>
+<!--
+#endif
+-->
+
+<!-- signal: PhysicalLinkStatusInd
+#ifdef INC_PhysicalLinkStatusInd
+-->
+	<signal name="PhysicalLinkStatusInd">
+		<arg name="gattId" type="u"/>
+		<arg name="address" type="s" /> <!--  Peer address  -->
+		<arg name="connInfo" type="u" /> <!-- uint32,  Connection info flags (radio type etc.)  -->
+		<arg name="status" type="b" /> <!-- boolean,  TRUE = connected, FALSE = disconnected  -->
+	</signal>
+<!--
+#endif
+-->
+
+<!-- signal: WhitelistChangeInd
+#ifdef INC_WhitelistChangeInd
+-->
+	<signal name="WhitelistChangeInd">
+		<arg name="gattId" type="u"/>
+	</signal>
+<!--
+#endif
+-->
+
+<!-- signal: ReportInd
+#ifdef INC_ReportInd
+-->
+	<signal name="ReportInd">
+		<arg name="gattId" type="u"/>
+		<arg name="eventType" type="y" /> <!-- Report type -->
+     		<arg name="address" type="s" /> <!--  Peer address  -->
+		<arg name="permanentAddress" type="s" /> <!--  Permanent (resolved) peer address  -->
+		<arg name="data" type="ay" /> <!-- report data -->
+		<arg name="rssi" type="n" /> <!-- RSSI, 8 bit signed value really-->
+	</signal>
+<!--
+#endif
+-->
+
+<!-- signal: SecurityCfm
+#ifdef INC_SecurityCfm
+-->
+	 <signal name="SecurityCfm">
+	 	<arg name="gattId" type="u"/>
+		<arg name="resultCode" type="q" /> <!--  Result code  -->
+                <arg name="resultSupplier" type="q" /> <!--  Result error code supplier  -->
+		<arg name="btConnId" type="u" /> <!--  Connection identifier  -->
+	 </signal>
+<!--
+#endif
+-->
+
+<!-- method: CentralReq
+#ifdef INC_CentralReq
+-->
+	<method name="CentralReq">
+		<arg name="gattId" type="u" direction="in" /><!-- uint32,  The application handle  -->
+		<arg name="address" type="s" direction="in" /><!--  Peer address (may be all-zeros if whitelist)  -->
+		<arg name="flags" type="u" direction="in" /><!-- uint32,  Connection flags  -->
+		<arg name="preferredMtu" type="q" direction="in" /><!-- uint16,  The MTU the application prefers. 0 = no preference  -->
+	</method>
+<!--
+#endif
+-->
+
+<!-- method: PeripheralReq
+#ifdef INC_PeripheralReq
+-->
+	<method name="PeripheralReq">
+		<arg name="gattId" type="u" direction="in" /><!-- uint32,  The application handle  -->
+                <arg name="address" type="s" direction="in" /><!--  Peer address (may be all-zeros if whitelist/undirected)  -->
+		<arg name="flags" type="u" direction="in" /><!-- uint32,  Connection flags  -->
+		<arg name="preferredMtu" type="q" direction="in" /><!-- uint16,  The MTU the application prefers. 0 = no preference  -->
+	</method>
+<!--
+#endif
+-->
+
+<!-- method: PeripheralReqData
+#ifdef INC_PeripheralReqData
+-->
+	<method name="PeripheralReqData">
+		<arg name="gattId" type="u" direction="in" /><!-- uint32,  The application handle  -->
+		<arg name="address" type="s" direction="in" /><!--  Peer address (may be all-zeros if whitelist/undirected)  -->
+		<arg name="flags" type="u" direction="in" /><!-- uint32,  Connection flags  -->
+		<arg name="advertisingData" type="ay" direction="in" /><!-- byte array,  pointer to advertising data  -->
+		<arg name="scanResponseData" type="ay" direction="in" /><!-- byte array,  Pointer to scan-response data  -->
+		<arg name="preferredMtu" type="q" direction="in" /><!-- uint16,  The MTU the application prefers. 0 = no preference  -->
+	</method>
+<!--
+#endif
+-->
+
+<!-- method: BredrConnectReq
+#ifdef INC_BredrConnectReq
+-->
+	<method name="BredrConnectReq">
+		<arg name="gattId" type="u" direction="in" /><!-- uint32,  The application handle  -->
+		<arg name="address" type="s" direction="in" /><!--  Peer address (may be all-zeros if whitelist)  -->
+		<arg name="flags" type="u" direction="in" /><!-- uint32,  Connection flags  -->
+	</method>
+<!--
+#endif
+-->
+
+<!-- method: BredrAcceptReq
+#ifdef INC_BredrAcceptReq
+-->
+	<method name="BredrAcceptReq">
+		<arg name="gattId" type="u" direction="in" /><!-- uint32,  The application handle  -->
+		<arg name="flags" type="u" direction="in" /><!-- uint32,  Connection flags  -->
+	</method>
+<!--
+#endif
+-->
+
+<!-- method: DisconnectReq
+#ifdef INC_DisconnectReq
+-->
+	<method name="DisconnectReq">
+		<arg name="gattId" type="u" direction="in" /><!-- uint32,  The application handle  -->
+		<arg name="btConnId" type="u" direction="in" /><!--  connection instance index  -->
+	</method>
+<!--
+#endif
+-->
+
+<!-- method: RegisterReq
+#ifdef INC_RegisterReq
+-->
+	<method name="RegisterReq">
+		<arg name="context" type="q" direction="in" /><!-- uint16,  Value returned in RegisterCfm  -->
+	</method>
+<!--
+#endif
+-->
+
+<!-- method: UnregisterReq
+#ifdef INC_UnregisterReq
+-->
+	<method name="UnregisterReq">
+		<arg name="gattId" type="u" direction="in" /><!-- uint32,  The application handle  -->
+	</method>
+<!--
+#endif
+-->
+
+<!-- method: DbAllocReq
+#ifdef INC_DbAllocReq
+-->
+	<method name="DbAllocReq">
+		<arg name="gattId" type="u" direction="in" /><!-- uint32,  The application handle  -->
+		<arg name="numOfAttrHandles" type="q" direction="in" /><!-- uint16,  Number of attribute handles  -->
+		<arg name="preferredStartHandle" type="q" direction="in" /><!-- uint16,  The StartHandle the application prefers. 0 = no preference  -->
+	</method>
+<!--
+#endif
+-->
+
+<!-- method: DbDeallocReq
+#ifdef INC_DbDeallocReq
+-->
+	<method name="DbDeallocReq">
+		<arg name="gattId" type="u" direction="in" /><!-- uint32,  The application handle  -->
+	</method>
+<!--
+#endif
+-->
+
+<!-- TODO!!!
+	<method name="DbAddReq">
+		<arg name="gattId" type="u" direction="in" />
+		<arg name="db" type="###CsrBtGattDb*###" direction="in" />
+	</method>
+-->
+
+<!-- method: DbRemoveReq
+#ifdef INC_DbRemoveReq
+-->
+	<method name="DbRemoveReq">
+		<arg name="gattId" type="u" direction="in" /><!-- uint32,  Application handle  -->
+		<arg name="start" type="q" direction="in" /><!-- uint16,  Start attribute handle for removal (inclusive)  -->
+		<arg name="end" type="q" direction="in" /><!-- uint16,  End attribute handle for removal (inclusive)  -->
+	</method>
+<!--
+#endif
+-->
+
+<!-- method: FindInclServicesReq
+#ifdef INC_FindInclServicesReq
+-->
+	<method name="FindInclServicesReq">
+		<arg name="gattId" type="u" direction="in" /><!-- uint32,  Application identifier  -->
+		<arg name="btConnId" type="u" direction="in" /><!--  Connection identifier  -->
+		<arg name="startHandle" type="q" direction="in" /><!-- uint16,  Starting handle of the specified service  -->
+		<arg name="endGroupHandle" type="q" direction="in" /><!-- uint16,  Ending handle of the specified service  -->
+	</method>
+<!--
+#endif
+-->
+
+<!-- method: ReadReq
+#ifdef INC_ReadReq
+-->
+	<method name="ReadReq">
+		<arg name="gattId" type="u" direction="in" /><!-- uint32,  Application identifier  -->
+		<arg name="btConnId" type="u" direction="in" /><!--  Connection identifier  -->
+		<arg name="handle" type="q" direction="in" /><!-- uint16,  Characteristic Value Handle  -->
+		<arg name="offset" type="q" direction="in" /><!-- uint16,  The offset of the first octet that shall be read  -->
+	</method>
+<!--
+#endif
+-->
+	
+<!-- method: ReadLocalReq
+#ifdef INC_ReadLocalReq
+-->
+	<method name="ReadLocalReq">
+		<arg name="gattId" type="u" direction="in" /><!-- uint32,  Application identifier  -->
+		<arg name="handle" type="q" direction="in" /><!-- uint16,  Characteristic Value Handle  -->
+	</method>
+<!--
+#endif
+-->
+
+<!-- method: ReadExtendedPropertiesReq
+#ifdef INC_ReadExtendedPropertiesReq
+-->
+	<method name="ReadExtendedPropertiesReq">
+		<arg name="gattId" type="u" direction="in" /><!-- uint32,  Application identifier  -->
+		<arg name="btConnId" type="u" direction="in" /><!--  Connection identifier  -->
+		<arg name="handle" type="q" direction="in" />
+	</method>
+<!--
+#endif
+-->
+
+<!-- method: ReadExtendedPropertiesLocalReq
+#ifdef INC_ReadExtendedPropertiesLocalReq
+-->
+	<method name="ReadExtendedPropertiesLocalReq">
+		<arg name="gattId" type="u" direction="in" /><!-- uint32,  Application identifier  -->
+		<arg name="handle" type="q" direction="in" />
+	</method>
+<!--
+#endif
+-->
+
+<!-- method: ReadUserDescriptionReq
+#ifdef INC_ReadUserDescriptionReq
+-->
+	<method name="ReadUserDescriptionReq">
+		<arg name="gattId" type="u" direction="in" /><!-- uint32,  Application identifier  -->
+		<arg name="btConnId" type="u" direction="in" /><!--  Connection identifier  -->
+		<arg name="handle" type="q" direction="in" /><!-- The handle of the Characteristic User Description declaration -->
+	</method>
+<!--
+#endif
+-->
+
+<!-- method: ReadUserDescriptionLocalReq
+#ifdef INC_ReadUserDescriptionLocalReq
+-->
+	<method name="ReadUserDescriptionLocalReq">
+	        <arg name="gattId" type="u" direction="in" /><!-- uint32,  Application identifier  -->
+                <arg name="handle" type="q" direction="in" /><!-- The handle of the Characteristic User Description declaration -->
+        </method>
+<!--
+#endif
+-->
+
+<!-- method: ReadMultiReq
+#ifdef INC_ReadMultiReq
+-->
+	<method name="ReadMultiReq">
+		<arg name="gattId" type="u" direction="in" /><!-- uint32,  Application identifier  -->
+		<arg name="btConnId" type="u" direction="in" /><!--  Connection identifier  -->
+		<arg name="handles" type="aq" direction="in" /><!--  A set of two or more attribute handles  -->
+	</method>
+<!--
+#endif
+-->
+
+<!-- method: WriteReq
+#ifdef INC_WriteReq
+-->
+	<method name="WriteReq">
+		<arg name="gattId" type="u" direction="in" /><!-- uint32,  Application identifier  -->
+		<arg name="btConnId" type="u" direction="in" /><!--  Connection identifier  -->
+		<arg name="handle" type="q" direction="in" /><!-- The Charateristic Value Handle -->
+		<arg name="offset" type="q" direction="in" /><!--The offset of the first octet to be written -->
+		<arg name="value" type="ay" direction="in" /><!-- attribute value -->
+	</method>
+<!--
+#endif
+-->
+
+<!-- method: WriteLocalReq
+#ifdef INC_WriteLocalReq
+-->
+	<method name="WriteLocalReq">
+        	<arg name="gattId" type="u" direction="in" /><!-- uint32,  Application identifier  -->
+                <arg name="handle" type="q" direction="in" /><!-- The Charateristic Value Handle -->
+                <arg name="value" type="ay" direction="in" /><!-- attribute value -->
+	</method>
+<!--
+#endif
+-->
+
+
+<!-- method: WriteClientConfigurationReq
+#ifdef INC_WriteClientConfigurationReq
+-->
+	<method name="WriteClientConfigurationReq">
+		<arg name="gattId" type="u" direction="in" /><!-- uint32,  Application identifier  -->
+		<arg name="btConnId" type="u" direction="in" /><!--  Connection identifier  -->
+		<arg name="clientConfigHandle" type="q" direction="in" /><!-- uint16,  Handle for the Client Characteristic Configuration  -->
+		<arg name="valueHandle" type="q" direction="in" /><!-- uint16,  Attribute Handle of the Characteristic Value  -->
+		<arg name="configuration" type="q" direction="in" /><!-- uint16,  Client Characteristic Configuration bits  -->
+	</method>
+<!--
+#endif
+-->
+
+<!-- method: CancelReq
+#ifdef INC_CancelReq
+-->
+	<method name="CancelReq">
+		<arg name="gattId" type="u" direction="in" /><!-- uint32,  Application identifier  -->
+		<arg name="btConnId" type="u" direction="in" /><!--  Connection identifier  -->
+	</method>
+<!--
+#endif
+-->
+
+<!-- method: ParamScanReq
+#ifdef INC_ParamScanReq
+-->
+	<method name="ParamScanReq">
+		<arg name="gattId" type="u" direction="in" /><!-- uint32,  Application identifier  -->
+		<arg name="scanInterval" type="q" direction="in" /><!-- uint16,  Scanning interval  -->
+		<arg name="scanWindow" type="q" direction="in" /><!-- uint16,  Scanning window  -->
+	</method>
+<!--
+#endif
+-->
+
+<!-- method: ParamAdvertiseReq
+#ifdef INC_ParamAdvertiseReq
+-->
+	<method name="ParamAdvertiseReq">
+		<arg name="gattId" type="u" direction="in" /><!-- uint32,  Application identifier  -->
+		<arg name="advIntervalMin" type="q" direction="in" /><!-- uint16,  Advertising interval minimum  -->
+		<arg name="advIntervalMax" type="q" direction="in" /><!-- uint16,  Advertising interval maximum  -->
+		<arg name="advertisingChannelMap" type="y" direction="in" /><!-- uint8,  Advertising channel map  -->
+	</method>
+<!--
+#endif
+-->
+
+<!-- method: ParamConnectionReq
+#ifdef INC_ParamConnectionReq
+-->
+	<method name="ParamConnectionReq">
+		<arg name="gattId" type="u" direction="in" /><!-- uint32,  Application identifier  -->
+		<arg name="scanInterval" type="q" direction="in" /><!-- uint16,  Scan interval for central  -->
+		<arg name="scanWindow" type="q" direction="in" /><!-- uint16,  Scan window for central  -->
+		<arg name="connIntervalMin" type="q" direction="in" /><!-- uint16,  Connection interval minimum  -->
+		<arg name="connIntervalMax" type="q" direction="in" /><!-- uint16,  Connection interval maximum  -->
+		<arg name="connLatency" type="q" direction="in" /><!-- uint16,  Default connection latency  -->
+		<arg name="supervisionTimeout" type="q" direction="in" /><!-- uint16,  Default connection supervision timeout  -->
+		<arg name="connAttemptTimeout" type="q" direction="in" /><!-- uint16,  Connection attempt timeout  -->
+		<arg name="advIntervalMin" type="q" direction="in" /><!-- uint16,  Peripheral advertise interval min  -->
+		<arg name="advIntervalMax" type="q" direction="in" /><!-- uint16,  Peripheral advertise interval max  -->
+		<arg name="connLatencyMax" type="q" direction="in" /><!-- uint16,  Max acceptable connection latency  -->
+		<arg name="supervisionTimeoutMin" type="q" direction="in" /><!-- uint16,  Min acceptable supervision timeout  -->
+		<arg name="supervisionTimeoutMax" type="q" direction="in" /><!-- uint16,  Max acceptable supervision timeout  -->
+	</method>
+<!--
+#endif
+-->
+
+<!-- method: ParamConnUpdateReq
+#ifdef INC_ParamConnUpdateReq
+-->
+	<method name="ParamConnUpdateReq">
+		<arg name="gattId" type="u" direction="in" /><!-- uint32,  Application identifier  -->
+		<arg name="btConnId" type="u" direction="in" /><!--  Connection identifier  -->
+		<arg name="connIntervalMin" type="q" direction="in" /><!-- uint16,  Connection interval min  -->
+		<arg name="connIntervalMax" type="q" direction="in" /><!-- uint16,  Connection interval max  -->
+		<arg name="connLatency" type="q" direction="in" /><!-- uint16,  Connection latency  -->
+		<arg name="supervisionTimeout" type="q" direction="in" /><!-- uint16,  Supervision timeout  -->
+		<arg name="minimumCeLength" type="q" direction="in" /><!-- uint16,  Connection event length min  -->
+		<arg name="maximumCeLength" type="q" direction="in" /><!-- uint16,  Connection event length max  -->
+	</method>
+<!--
+#endif
+-->
+
+<!-- method: WhitelistAddReq
+#ifdef INC_WhitelistAddReq
+-->
+	<method name="WhitelistAddReq">
+		<arg name="gattId" type="u" direction="in" /><!-- uint32,  Application identifier  -->
+		<arg name="address" type="as" direction="in" /><!--  Array  -->
+	</method>
+<!--
+#endif
+-->
+
+<!-- method: WhitelistClearReq
+#ifdef INC_WhitelistClearReq
+-->
+	<method name="WhitelistClearReq">
+		<arg name="gattId" type="u" direction="in" /><!-- uint32,  Application identifier  -->
+	</method>
+<!--
+#endif
+-->
+
+<!-- method: WhitelistReadReq
+#ifdef INC_WhitelistReadReq
+-->
+	<method name="WhitelistReadReq">
+		<arg name="gattId" type="u" direction="in" /><!-- uint32,  Application identifier  -->
+	</method>
+<!--
+#endif
+-->
+
+<!-- method: SetEventMaskReq
+#ifdef INC_SetEventMaskReq
+-->
+	<method name="SetEventMaskReq">
+		<arg name="gattId" type="u" direction="in" /><!-- uint32,  Application identifier  -->
+		<arg name="eventMask" type="u" direction="in" /><!-- uint32,  Defines the event(s) to subscribe for  -->
+	</method>
+<!--
+#endif
+-->
+
+<!-- method: DiscoverAllPrimaryServicesReq
+#ifdef INC_DiscoverAllPrimaryServicesReq
+-->
+	<method name="DiscoverAllPrimaryServicesReq">
+		<arg name="gattId" type="u" direction="in" /><!-- uint32,  Application identifier  -->
+		<arg name="btConnId" type="u" direction="in" /><!--  Connection identifier  -->
+	</method>
+<!--
+#endif
+-->
+
+<!-- method: DiscoverAllPrimaryServicesLocalReq
+#ifdef INC_DiscoverAllPrimaryServicesLocalReq
+-->
+	<method name="DiscoverAllPrimaryServicesLocalReq">
+		<arg name="gattId" type="u" direction="in" /><!-- uint32,  Application identifier  -->
+	</method>
+<!--
+#endif
+-->
+
+<!-- method: DiscoverAllCharacOfAServiceReq
+#ifdef INC_DiscoverAllCharacOfAServiceReq
+-->
+	<method name="DiscoverAllCharacOfAServiceReq">
+		<arg name="gattId" type="u" direction="in" /><!-- uint32,  Application identifier  -->
+		<arg name="btConnId" type="u" direction="in" /><!--  Connection identifier  -->
+		<arg name="startHandle" type="q" direction="in" /> <!-- uint16,  Start handle  -->
+                <arg name="endHandle" type="q" direction="in" /> <!-- uint16, End handle  -->
+	</method>
+<!--
+#endif
+-->
+<!-- method: DiscoverAllCharacOfAServiceLocalReq
+#ifdef INC_DiscoverAllCharacOfAServiceLocalReq
+-->
+	<method name="DiscoverAllCharacOfAServiceLocalReq">
+		<arg name="gattId" type="u" direction="in" /><!-- uint32,  Application identifier  -->
+		<arg name="startHandle" type="q" direction="in" /> <!-- uint16,  Start handle  -->
+                <arg name="endHandle" type="q" direction="in" /> <!-- uint16, End handle  -->
+	</method>
+<!--
+#endif
+-->
+
+<!-- method: ReadClientConfigurationReq
+#ifdef INC_ReadClientConfigurationReq
+-->
+	<method name="ReadClientConfigurationReq">
+		<arg name="gattId" type="u" direction="in" /><!-- uint32,  Application identifier  -->
+		<arg name="btConnId" type="u" direction="in" /><!--  Connection identifier  -->
+		<arg name="handle" type="q" direction="in" /><!-- The handle of the Client Characteristic Configuration declaration -->
+	</method>
+<!--
+#endif
+-->
+
+
+<!-- method: ReadServerConfigurationReq
+#ifdef INC_ReadServerConfigurationReq
+-->
+	<method name="ReadServerConfigurationReq">
+		<arg name="gattId" type="u" direction="in" /><!-- uint32,  Application identifier  -->
+                <arg name="btConnId" type="u" direction="in" /><!--  Connection identifier  -->
+                <arg name="handle" type="q" direction="in" /><!-- The handle of the Server Characteristic Configuration declaration -->
+	</method>
+<!--
+#endif
+-->
+
+<!-- method: ReadServerConfigurationLocalReq
+#ifdef INC_ReadServerConfigurationLocalReq
+-->
+	<method name="ReadServerConfigurationLocalReq">
+		<arg name="gattId" type="u" direction="in" /><!-- uint32,  Application identifier  -->
+		<arg name="handle" type="q" direction="in" /><!-- The handle of the Server Characteristic Configuration declaration -->
+	</method>
+<!--
+#endif
+-->
+
+<!-- method: ReadPresentationFormatReq
+#ifdef INC_ReadPresentationFormatReq
+-->
+	<method name="ReadPresentationFormatReq">
+		<arg name="gattId" type="u" direction="in" /><!-- uint32,  Application identifier  -->
+                <arg name="btConnId" type="u" direction="in" /><!--  Connection identifier  -->
+                <arg name="handle" type="q" direction="in" />
+        </method>
+<!--
+#endif
+-->
+
+<!-- method: ReadPresentationFormatLocalReq
+#ifdef INC_ReadPresentationFormatLocalReq
+-->
+	<method name="ReadPresentationFormatLocalReq">
+		<arg name="gattId" type="u" direction="in" /><!-- uint32,  Application identifier  -->
+                <arg name="handle" type="q" direction="in" />
+        </method>
+<!--
+#endif
+-->
+
+<!-- method: ReadAggregateFormatReq
+#ifdef INC_ReadAggregateFormatReq
+-->
+	<method name="ReadAggregateFormatReq">
+		<arg name="gattId" type="u" direction="in" /><!-- uint32,  Application identifier  -->
+                <arg name="btConnId" type="u" direction="in" /><!--  Connection identifier  -->
+                <arg name="handle" type="q" direction="in" />
+	</method>
+<!--
+#endif
+-->
+	
+<!-- method: ReadAggregateFormatLocalReq
+#ifdef INC_ReadAggregateFormatLocalReq
+-->
+	<method name="ReadAggregateFormatLocalReq">
+		<arg name="gattId" type="u" direction="in" /><!-- uint32,  Application identifier  -->
+                <arg name="handle" type="q" direction="in" />
+	</method>
+<!--
+#endif
+-->
+	
+<!-- method: ReadProfileDefinedDescriptorReq
+#ifdef INC_ReadProfileDefinedDescriptorReq
+-->
+	<method name="ReadProfileDefinedDescriptorReq">
+		<arg name="gattId" type="u" direction="in" /><!-- uint32,  Application identifier  -->
+                <arg name="btConnId" type="u" direction="in" /><!--  Connection identifier  -->
+                <arg name="handle" type="q" direction="in" />
+                <arg name="offset" type="q" direction="in" /><!-- The offset of the first octet that shall be read -->
+	</method>
+<!--
+#endif
+-->
+	
+<!-- method: ReadProfileDefinedDescriptorLocalReq
+#ifdef INC_ReadProfileDefinedDescriptorLocalReq
+-->
+	<method name="ReadProfileDefinedDescriptorLocalReq">
+		<arg name="gattId" type="u" direction="in" /><!-- uint32,  Application identifier  -->
+                <arg name="handle" type="q" direction="in" />
+	</method>
+<!--
+#endif
+-->
+	
+<!-- method: WriteCmdReq
+#ifdef INC_WriteCmdReq
+-->
+	<method name="WriteCmdReq">
+		<arg name="gattId" type="u" direction="in" /><!-- uint32,  Application identifier  -->
+                <arg name="btConnId" type="u" direction="in" /><!--  Connection identifier  -->
+		<arg name="handle" type="q" direction="in" /> <!--  The Charateristic Value Handle-->
+		<arg name="value" type="ay" direction="in" /> <!-- attribute value -->
+	</method>
+<!--
+#endif
+-->
+
+	
+<!-- method: WriteSignedCmdReq
+#ifdef INC_WriteSignedCmdReq
+-->
+	<method name="WriteSignedCmdReq">
+		<arg name="gattId" type="u" direction="in" /><!-- uint32,  Application identifier  -->
+                <arg name="btConnId" type="u" direction="in" /><!--  Connection identifier  -->
+		<arg name="handle" type="q" direction="in" /> <!-- The Charateristic Value Handle -->
+		<arg name="value" type="ay" direction="in" /> <!-- attribute value -->
+	</method>
+<!--
+#endif
+-->
+
+
+<!-- method: ReliableWritesReq
+#ifdef INC_ReliableWritesReq
+-->
+	<method name="ReliableWritesReq">
+		<arg name="gattId" type="u" direction="in" /><!-- uint32,  Application identifier  -->
+                <arg name="btConnId" type="u" direction="in" /><!--  Connection identifier  -->
+		<arg name="attrWritePairs" type="a(qqay)" direction="in" /> <!-- list of  Charateristic Attribute Value Handles, offsets and Attribute Values -->
+	</method>
+<!--
+#endif
+-->
+		
+
+<!-- method: WriteUserDescriptionReq
+#ifdef INC_WriteUserDescriptionReq
+-->
+	<method name="WriteUserDescriptionReq">
+		<arg name="gattId" type="u" direction="in" /><!-- uint32,  Application identifier  -->
+                <arg name="btConnId" type="u" direction="in" /><!--  Connection identifier  -->
+                <arg name="handle" type="q" direction="in" />
+                <arg name="utf8String" type="s" direction="in" /> <!-- characteristic user description UTF-8 string -->
+	</method>
+<!--
+#endif
+-->
+
+
+<!-- method: WriteUserDescriptionLocalReq
+#ifdef INC_WriteUserDescriptionLocalReq
+-->
+	<method name="WriteUserDescriptionLocalReq">
+		<arg name="gattId" type="u" direction="in" /><!-- uint32,  Application identifier  -->
+		<arg name="handle" type="q" direction="in" />
+		<arg name="utf8String" type="s" direction="in" /> <!-- characteristic user description UTF-8 string -->
+	</method>
+<!--
+#endif
+-->
+
+<!-- method: WriteServerConfigurationReq
+#ifdef INC_WriteServerConfigurationReq
+-->
+	<method name="WriteServerConfigurationReq">
+		<arg name="gattId" type="u" direction="in" /><!-- uint32,  Application identifier  -->
+                <arg name="btConnId" type="u" direction="in" /><!--  Connection identifier  -->
+                <arg name="handle" type="q" direction="in" />
+                <arg name="configBits" type="q" direction="in" /><!-- Server Characteristic Configuration bit field value -->
+	</method>
+<!--
+#endif
+-->
+
+<!-- method: WriteServerConfigurationLocalReq
+#ifdef INC_WriteServerConfigurationLocalReq
+-->
+	<method name="WriteServerConfigurationLocalReq">
+		<arg name="gattId" type="u" direction="in" /><!-- uint32,  Application identifier  -->
+		<arg name="handle" type="q" direction="in" />
+		<arg name="configBits" type="q" direction="in" /><!-- Server Characteristic Configuration bit field value -->
+	</method>
+<!--
+#endif
+-->
+
+<!-- method: WriteProfileDefinedDescriptorReq
+#ifdef INC_WriteProfileDefinedDescriptorReq
+-->
+	<method name="WriteProfileDefinedDescriptorReq">
+		<arg name="gattId" type="u" direction="in" /><!-- uint32,  Application identifier  -->
+                <arg name="btConnId" type="u" direction="in" /><!--  Connection identifier  -->
+                <arg name="handle" type="q" direction="in" />
+                <arg name="offset" type="q" direction="in" />
+                <arg name="value" type="ay" direction="in" />
+        </method>
+<!--
+#endif
+-->
+
+<!-- method: WriteProfileDefinedDescriptorLocalReq
+#ifdef INC_WriteProfileDefinedDescriptorLocalReq
+-->
+	<method name="WriteProfileDefinedDescriptorLocalReq">
+		<arg name="gattId" type="u" direction="in" /><!-- uint32,  Application identifier  -->
+		<arg name="handle" type="q" direction="in" />
+		<arg name="value" type="ay" direction="in" />
+	</method>
+<!--
+#endif
+-->
+
+<!-- method: SubscribeReq
+#ifdef INC_SubscribeReq
+-->
+	<method name="SubscribeReq">
+		<arg name="gattId" type="u" direction="in" /><!-- uint32,  Application identifier  -->
+		<arg name="address" type="s" direction="in" /> <!--  Peer address  -->
+		<arg name="handle" type="q" direction="in" />	
+	</method>
+<!--
+#endif
+-->
+
+<!-- method: UnsubscribeReq
+#ifdef INC_UnsubscribeReq
+-->
+	<method name="UnsubscribeReq">
+		<arg name="gattId" type="u" direction="in" /><!-- uint32,  Application identifier  -->
+                <arg name="address" type="s" direction="in" /> <!--  Peer address  -->
+                <arg name="handle" type="q" direction="in" />
+	</method>
+<!--
+#endif
+-->
+
+<!-- method: ScanReqStop
+#ifdef INC_ScanReqStop
+-->
+	<method name="ScanReqStop">
+		<arg name="gattId" type="u" direction="in" /><!-- uint32,  Application identifier  -->
+	</method>
+<!--
+#endif
+-->
+	
+<!-- method: ScanReqStart
+#ifdef INC_ScanReqStart
+-->
+	<method name="ScanReqStart">
+		<arg name="gattId" type="u" direction="in" /><!-- uint32,  Application identifier  -->
+		<arg name="flags" type="y" direction="in" />
+	</method>
+<!--
+#endif
+-->	
+
+<!-- TODO
+	<method name="ScanReqStartFilter">
+		<arg name="gattId" type="u" direction="in" />
+		<arg name="flags" type="y" direction="in" />
+		<arg name="filterAddresses" type="as" direction="in" />
+		<arg name="filterData" type="###XXXX###" direction="in" />
+	</method>
+-->
+
+<!-- method: AdvertiseReqStart
+#ifdef INC_AdvertiseReqStart
+-->
+	<method name="AdvertiseReqStart">
+		<arg name="gattId" type="u" direction="in" /><!-- uint32,  Application identifier  -->
+	</method>
+<!--
+#endif
+-->
+	
+<!-- method: AdvertiseReqStartData
+#ifdef INC_AdvertiseReqStartData
+-->
+	<method name="AdvertiseReqStartData">
+		<arg name="gattId" type="u" direction="in" /><!-- uint32,  Application identifier  -->
+		<arg name="advFlags" type="u" direction="in" />
+		<arg name="advData" type="ay" direction="in" />
+		<arg name="scanRspData" type="ay" direction="in" />
+	</method>
+<!--
+#endif
+-->
+	
+<!-- method: AdvertiseReqStop
+#ifdef INC_AdvertiseReqStop
+-->
+	<method name="AdvertiseReqStop">
+		<arg name="gattId" type="u" direction="in" /><!-- uint32,  Application identifier  -->
+	</method>
+<!--
+#endif
+-->
+
+<!-- method: DiscoverAllCharacDescriptorsReq
+#ifdef INC_DiscoverAllCharacDescriptorsReq
+-->
+	<method name="DiscoverAllCharacDescriptorsReq">
+		<arg name="gattId" type="u" direction="in" /><!-- uint32,  Application identifier  -->
+		<arg name="btConnId" type="u" direction="in" /><!--  Connection identifier  -->
+		<arg name="startHandle" type="q" direction="in" /> <!-- uint16,  Start handle  -->
+                <arg name="endHandle" type="q" direction="in" /> <!-- uint16, End handle  -->
+	</method>
+<!--
+#endif
+-->
+
+<!-- method: SecurityReq
+#ifdef INC_SecurityReq
+-->
+	<method name="SecurityReq">
+		<arg name="gattId" type="u" direction="in" /><!-- uint32,  Application identifier  -->
+		<arg name="btConnId" type="u" direction="in" /><!--  Connection identifier  -->
+		<arg name="secRequirements" type="u" direction="in" /><!-- security flags -->
+	</method>
+<!--
+#endif
+-->
+
+</interface></node>

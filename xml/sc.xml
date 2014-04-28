@@ -1,0 +1,717 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN" "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<node>
+<interface name="com.bluegiga.v2.bt.sc">
+
+<!-- signal: ReadDeviceRecordInd
+#ifdef INC_ReadDeviceRecordInd
+-->
+<signal name="ReadDeviceRecordInd">
+	<arg name="deviceProperties" type="a(ssuuuuub)" /> <!-- BtDevicePropertiesType*,  devices from SC_DB with their respective properties  -->
+</signal>
+
+<!--
+#endif
+-->
+
+<!-- signal: ReadDeviceRecordCfm
+#ifdef INC_ReadDeviceRecordCfm
+-->
+<signal name="ReadDeviceRecordCfm">
+	<arg name="totalNumOfDevices" type="u" /> <!-- num of devices that were contained in SC_DB  -->
+	<arg name="deviceProperties" type="a(ssuuuuub)" /> <!-- BtDevicePropertiesType*,  devices from SC_DB with their respective properties  -->
+</signal>
+
+<!--
+#endif
+-->
+
+<!-- signal: BondInd
+#ifdef INC_BondInd
+-->
+<signal name="BondInd">
+	<arg name="resultCode" type="q" />
+	<arg name="resultSupplier" type="q" />
+	<arg name="cod" type="u" />
+	<arg name="deviceAddr" type="s" />
+	<arg name="addedToScDbList" type="b" /> <!-- If TRUE the device is added to the Security Managers device database  -->
+</signal>
+
+<!--
+#endif
+-->
+
+<!-- signal: BondCfm
+#ifdef INC_BondCfm
+-->
+<signal name="BondCfm">
+	<arg name="resultCode" type="q" />
+	<arg name="resultSupplier" type="q" />
+	<arg name="cod" type="u" />
+	<arg name="deviceAddr" type="s" />
+	<arg name="addedToScDbList" type="b" /> <!-- If TRUE the device is added to the Security Managers device database  -->
+</signal>
+
+<!--
+#endif
+-->
+
+
+<!-- signal: LeSecurityInd
+#ifdef INC_LeSecurityInd
+-->
+
+<signal name="LeSecurityInd">
+	<arg name="resultCode" type="q" />
+	<arg name="resultSupplier" type="q" />
+	<arg name="deviceAddr" type="s" />
+	<arg name="addedToScDbList" type="b" /> <!-- If TRUE the device is added to the Security Managers device database  -->
+</signal>
+
+<!--
+#endif
+-->
+
+
+
+<!-- signal: DebondCfm
+#ifdef INC_DebondCfm
+-->
+<signal name="DebondCfm">
+	<arg name="resultCode" type="q" />
+	<arg name="resultSupplier" type="q" />
+	<arg name="deviceAddr" type="s" />
+</signal>
+
+<!--
+#endif
+-->
+
+<!-- signal: PasskeyInd
+#ifdef INC_PasskeyInd
+-->
+<signal name="PasskeyInd">
+	<arg name="cod" type="u" />
+	<arg name="deviceAddr" type="s" />
+	<arg name="deviceName" type="s" />
+	<arg name="paired" type="y" />
+	<arg name="initiator" type="b" /> <!-- True if we are initiator  -->
+</signal>
+
+<!--
+#endif
+-->
+
+<!-- signal: SspJustworksInd
+#ifdef INC_SspJustworksInd
+-->
+<signal name="SspJustworksInd">
+        <arg name="cod" type="u" />
+        <arg name="deviceAddr" type="s" />
+        <arg name="deviceName" type="s" />
+        <arg name="paired" type="y" />
+        <arg name="initiator" type="b" /> <!-- True if we are initiator  -->
+</signal>
+
+<!--
+#endif
+-->
+
+<!-- signal: EncryptionCfm
+#ifdef INC_EncryptionCfm
+-->
+<signal name="EncryptionCfm">
+	<arg name="resultCode" type="q" />
+	<arg name="resultSupplier" type="q" />
+	<arg name="encEnabled" type="b" /> <!-- encryption enabled  -->
+	<arg name="deviceAddr" type="s" />
+</signal>
+
+<!--
+#endif
+-->
+
+<!-- signal: SetSecurityModeCfm
+#ifdef INC_SetSecurityModeCfm
+-->
+<signal name="SetSecurityModeCfm">
+	<arg name="resultCode" type="q" />
+	<arg name="resultSupplier" type="q" />
+</signal>
+
+<!--
+#endif
+-->
+
+<!-- signal: AuthoriseInd
+#ifdef INC_AuthoriseInd
+-->
+<signal name="AuthoriseInd">
+	<arg name="deviceAddr" type="s" />
+	<arg name="deviceName" type="s" />
+	<arg name="serviceId" type="q" /> <!-- the id of the service for which authorisation is required  -->
+</signal>
+
+<!--
+#endif
+-->
+
+<!-- signal: AuthoriseExtInd
+#ifdef INC_AuthoriseExtInd
+-->
+<signal name="AuthoriseExtInd">
+	<arg name="deviceAddr" type="s" />
+	<arg name="deviceName" type="s" />
+	<arg name="serviceId" type="q" /> <!-- the id of the service for which authorisation is required  -->
+	<arg name="protocolId" type="q" /> <!-- dm_protocol_id_t,  protocol at which security is to be applied  -->
+	<arg name="channel" type="q" /> <!-- Uint16,  Channel for that protocol (e.g. RFCOMM server channel number, L2CAP PSM)  -->
+	<arg name="incoming" type="b" /> <!-- Bool,  Flag indicating peer-initiated (TRUE) or locally-initiated (FALSE)        -->
+</signal>
+
+<!--
+#endif
+-->
+
+<!-- signal: UpdateTrustLevelInd
+#ifdef INC_UpdateTrustLevelInd
+-->
+<signal name="UpdateTrustLevelInd">
+	<arg name="deviceAddr" type="s" />
+	<arg name="authorised" type="b" />
+</signal>
+
+<!--
+#endif
+-->
+
+<!-- signal: AuthenticateCfm
+#ifdef INC_AuthenticateCfm
+-->
+<signal name="AuthenticateCfm">
+	<arg name="deviceAddr" type="s" />
+	<arg name="resultCode" type="q" />
+	<arg name="resultSupplier" type="q" />
+</signal>
+
+<!--
+#endif
+-->
+
+<!-- signal: ModeInd
+#ifdef INC_ModeInd
+-->
+<signal name="ModeInd">
+	<arg name="mode" type="y" />
+</signal>
+
+<!--
+#endif
+-->
+
+<!-- signal: SspCompareInd
+#ifdef INC_SspCompareInd
+-->
+<signal name="SspCompareInd">
+	<arg name="cod" type="u" />
+	<arg name="deviceAddr" type="s" />
+	<arg name="deviceName" type="s" />
+	<arg name="paired" type="y" />
+	<arg name="authRequirements" type="u" />
+	<arg name="numericValue" type="u" />
+	<arg name="initiator" type="b" /> <!-- True if we are initiator  -->
+</signal>
+
+<!--
+#endif
+-->
+
+<!-- signal: SspNotificationInd
+#ifdef INC_SspNotificationInd
+-->
+<signal name="SspNotificationInd">
+        <arg name="cod" type="u" />
+        <arg name="deviceAddr" type="s" />
+        <arg name="deviceName" type="s" />
+        <arg name="paired" type="y" />
+        <arg name="authRequirements" type="u" />
+        <arg name="numericValue" type="u" />
+        <arg name="initiator" type="b" /> <!--  True if we are initiator  -->
+</signal>
+
+
+<!--
+#endif
+-->
+
+<!-- signal: SspPasskeyInd
+#ifdef INC_SspPasskeyInd
+-->
+<signal name="SspPasskeyInd">
+	<arg name="cod" type="u" />
+	<arg name="deviceAddr" type="s" />
+	<arg name="deviceName" type="s" />
+	<arg name="paired" type="y" />
+	<arg name="authRequirements" type="u" />
+	<arg name="initiator" type="b" /> <!-- True if we are initiator  -->
+</signal>
+
+<!--
+#endif
+-->
+
+<!-- signal: RebondInd
+#ifdef INC_RebondInd
+-->
+<signal name="RebondInd">
+	<arg name="cod" type="u" />
+	<arg name="deviceAddr" type="s" />
+	<arg name="deviceName" type="s" />
+</signal>
+
+<!--
+#endif
+-->
+
+<!-- signal: SspPairingInd
+#ifdef INC_SspPairingInd
+-->
+<signal name="SspPairingInd">
+	<arg name="cod" type="u" />
+	<arg name="deviceAddr" type="s" />
+	<arg name="deviceName" type="s" />
+	<arg name="authValid" type="b" />
+	<arg name="authRequirements" type="u" />
+	<arg name="paired" type="y" />
+	<arg name="initiator" type="b" /> <!-- True if we are initiator  -->
+</signal>
+
+<!--
+#endif
+-->
+
+<!-- signal: ReadLocalOobDataCfm
+#ifdef INC_ReadLocalOobDataCfm
+-->
+<signal name="ReadLocalOobDataCfm">
+	<arg name="deviceAddr" type="s" />
+	<arg name="oobHashC" type="ay" />
+	<arg name="oobRandR" type="ay" />
+	<arg name="resultCode" type="q" />
+	<arg name="resultSupplier" type="q" />
+</signal>
+
+<!--
+#endif
+-->
+
+<!-- signal: DebugModeCfm
+#ifdef INC_DebugModeCfm
+-->
+<signal name="DebugModeCfm">
+	<arg name="resultCode" type="q" />
+	<arg name="resultSupplier" type="q" />
+	<arg name="enabled" type="b" />
+</signal>
+
+<!--
+#endif
+-->
+
+<!-- signal: CancelAcceptBondInd
+#ifdef INC_CancelAcceptBondInd
+-->
+<signal name="CancelAcceptBondInd">
+	<arg name="resultCode" type="q" />
+	<arg name="resultSupplier" type="q" />
+</signal>
+
+<!--
+#endif
+-->
+
+<!-- signal: SspKeypressNotificationInd
+#ifdef INC_SspKeypressNotificationInd
+-->
+<signal name="SspKeypressNotificationInd">
+	<arg name="deviceAddr" type="s" />
+	<arg name="notificationType" type="y" />
+</signal>
+
+<!--
+#endif
+-->
+
+<!-- method: ReadDeviceRecordReq
+#ifdef INC_ReadDeviceRecordReq
+-->
+
+<!-- Function to read the entire SC DB -->
+<method name="ReadDeviceRecordReq">
+	<arg name="phandle" type="q" direction="in" />
+	<arg name="maxNumOfBytes" type="u" direction="in" /> <!-- number of bytes an indication is allowed to fill  -->
+</method>
+<!--
+#endif
+-->
+
+<!-- method: UpdateDeviceReq
+#ifdef INC_UpdateDeviceReq
+-->
+
+<!-- Function to update the properties of a stored device -->
+<method name="UpdateDeviceReq">
+	<arg name="phandle" type="q" direction="in" />
+	<arg name="deviceAddr" type="s" direction="in" />
+	<arg name="remoteName" type="s" direction="in" />
+	<arg name="classOfDevice" type="u" direction="in" />
+	<arg name="knownServices11_00_31" type="u" direction="in" />
+	<arg name="knownServices11_32_63" type="u" direction="in" />
+	<arg name="knownServices12_00_31" type="u" direction="in" />
+	<arg name="knownServices13_00_31" type="u" direction="in" />
+	<arg name="authorised" type="b" direction="in" />
+</method>
+
+<!--
+#endif
+-->
+
+<!-- method: ActivateReq
+#ifdef INC_ActivateReq
+-->
+<method name="ActivateReq">
+	<arg name="phandle" type="q" direction="in" />
+</method>
+<!--
+#endif
+-->
+
+<!-- method: BondReq
+#ifdef INC_BondReq
+-->
+
+<!-- Function to build and send a BT_SC_BOND_REQ message to the SC messagequeue. -->
+<method name="BondReq">
+	<arg name="phandle" type="q" direction="in" />
+	<arg name="deviceAddr" type="s" direction="in" />
+</method>
+<!--
+#endif
+-->
+
+<!-- method: DebondReq
+#ifdef INC_DebondReq
+-->
+
+<!-- Remove an existing bond between a pair of devices. -->
+<method name="DebondReq">
+	<arg name="phandle" type="q" direction="in" />
+	<arg name="deviceAddr" type="s" direction="in" />
+</method>
+<!--
+#endif
+-->
+
+<!-- method: SetSecurityModeReq
+#ifdef INC_SetSecurityModeReq
+-->
+
+<!-- Set the security mode to be used by the device -->
+<method name="SetSecurityModeReq">
+	<arg name="phandle" type="q" direction="in" />
+	<arg name="securityMode" type="y" direction="in" /> <!-- dm_security_mode_t,  the applied security mode  -->
+</method>
+<!--
+#endif
+-->
+
+<!-- method: EncryptionReq
+#ifdef INC_EncryptionReq
+-->
+
+<!-- Change the encryption mode for a specified device connection (BdAddr) -->
+<method name="EncryptionReq">
+	<arg name="phandle" type="q" direction="in" />
+	<arg name="encEnable" type="b" direction="in" />
+	<arg name="deviceAddr" type="s" direction="in" />
+</method>
+
+<!--
+#endif
+-->
+
+<!-- method: AuthoriseRes
+#ifdef INC_AuthoriseRes
+-->
+<method name="AuthoriseRes">
+	<arg name="authorised" type="b" direction="in" />
+	<arg name="deviceAddr" type="s" direction="in" />
+</method>
+<!--
+#endif
+-->
+
+<!-- method: SetTrustLevelReq
+#ifdef INC_SetTrustLevelReq
+-->
+
+<!-- ...... -->
+<method name="SetTrustLevelReq">
+	<arg name="deviceAddr" type="s" direction="in" />
+	<arg name="authorised" type="b" direction="in" />
+</method>
+<!--
+#endif
+-->
+
+<!-- method: CancelBondReq
+#ifdef INC_CancelBondReq
+-->
+
+<!-- Cancel a CSR_BT_SC_BOND_REQ -->
+<method name="CancelBondReq">
+	<arg name="phandle" type="q" direction="in" />
+	<arg name="deviceAddr" type="s" direction="in" />
+</method>
+<!--
+#endif
+-->
+
+<!-- method: AuthenticateReq
+#ifdef INC_AuthenticateReq
+-->
+
+<!-- Function to build and send a BT_SC_AUTHENTICATE_REQ message to the SC messagequeue. -->
+<method name="AuthenticateReq">
+	<arg name="phandle" type="q" direction="in" />
+	<arg name="deviceAddr" type="s" direction="in" />
+</method>
+<!--
+#endif
+-->
+
+<!-- method: ModeReq
+#ifdef INC_ModeReq
+-->
+
+<!-- Request to change the mode -->
+<method name="ModeReq">
+	<arg name="duration" type="u" direction="in" /> <!-- TIME -->
+	<arg name="mode" type="y" direction="in" />
+</method>
+<!--
+#endif
+-->
+
+<!-- method: SetIoCapabilityReq
+#ifdef INC_SetIoCapabilityReq
+-->
+
+<!-- Set authentication requirements of the local device -->
+<method name="SetIoCapabilityReq">
+	<arg name="ioCapability" type="y" direction="in" />
+</method>
+
+<!--
+#endif
+-->
+
+<!-- method: SetAuthRequirementsReq
+#ifdef INC_SetAuthRequirementsReq
+-->
+<method name="SetAuthRequirementsReq">
+	<arg name="authRequirements" type="y" direction="in" />
+	<arg name="leAuthRequirements" type="q" direction="in" />
+</method>
+<!--
+#endif
+-->
+
+<!-- method: SspCompareRes
+#ifdef INC_SspCompareRes
+-->
+
+<!-- Respond to a Numeric Comparison indication -->
+<method name="SspCompareRes">
+	<arg name="accept" type="b" direction="in" />
+	<arg name="deviceAddr" type="s" direction="in" />
+	<arg name="authorised" type="b" direction="in" />
+	<arg name="addDevice" type="b" direction="in" />
+</method>
+
+
+<!--
+#endif
+-->
+
+<!-- method: SspJustworksRes
+#ifdef INC_SspJustworksRes
+-->
+<method name="SspJustworksRes">
+        <arg name="accept" type="b" direction="in" />
+        <arg name="deviceAddr" type="s" direction="in" />
+        <arg name="authorised" type="b" direction="in" />
+        <arg name="addDevice" type="b" direction="in" />
+</method>
+
+<!--
+#endif
+-->
+
+<!-- method: SspNotificationRes
+#ifdef INC_SspNotificationRes
+-->
+<method name="SspNotificationRes">
+        <arg name="accept" type="b" direction="in" />
+        <arg name="deviceAddr" type="s" direction="in" />
+        <arg name="authorised" type="b" direction="in" />
+        <arg name="addDevice" type="b" direction="in" />
+</method>
+<!--
+#endif
+-->
+
+<!-- method: SspPasskeyRes
+#ifdef INC_SspPasskeyRes
+-->
+
+<!-- Respond to a SSP Passkey indication -->
+<method name="SspPasskeyRes">
+	<arg name="accept" type="b" direction="in" />
+	<arg name="deviceAddr" type="s" direction="in" />
+	<arg name="authorised" type="b" direction="in" />
+	<arg name="addDevice" type="b" direction="in" />
+	<arg name="numericValue" type="u" direction="in" />
+</method>
+<!--
+#endif
+-->
+
+<!-- method: PasskeyRes
+#ifdef INC_PasskeyRes
+-->
+<method name="PasskeyRes">
+	<arg name="accept" type="b" direction="in" />
+        <arg name="deviceAddr" type="s" direction="in" />
+        <arg name="passkey" type="s" direction="in" /> <!-- MAXIMUM LENGTH 16! -->
+	<arg name="addDevice" type="b" direction="in" />
+        <arg name="authorised" type="b" direction="in" />
+</method>
+<!--
+#endif
+-->
+
+<!-- method: SspKeypressNotificationReq
+#ifdef INC_SspKeypressNotificationReq
+-->
+
+<!-- Send a SSP Keypress notification to remote device -->
+<method name="SspKeypressNotificationReq">
+	<arg name="deviceAddr" type="s" direction="in" />
+	<arg name="notificationType" type="y" direction="in" />
+</method>
+<!--
+#endif
+-->
+
+<!-- method: RebondRes
+#ifdef INC_RebondRes
+-->
+
+<!-- Function to build and send a BT_SC_REBOND_RES message to the SCqueue. -->
+<method name="RebondRes">
+	<arg name="accept" type="b" direction="in" />
+	<arg name="deviceAddr" type="s" direction="in" />
+</method>
+
+<!--
+#endif
+-->
+
+<!-- method: SspPairingRes
+#ifdef INC_SspPairingRes
+-->
+<!-- Function to build and send a BT_SC_SSP_PAIRING_RES message to the SCqueue. -->
+<method name="SspPairingRes">
+	<arg name="accept" type="b" direction="in" />
+	<arg name="deviceAddr" type="s" direction="in" />
+	<arg name="authorised" type="b" direction="in" />
+	<arg name="addDevice" type="b" direction="in" />
+</method>
+
+<!--
+#endif
+-->
+
+<!-- method: SetEventMaskReq
+#ifdef INC_SetEventMaskReq
+-->
+<!-- Function to build and send a SC_SET_EVENT_MASK message to the SC messagequeue. -->
+<method name="SetEventMaskReq">
+	<arg name="eventMask" type="u" direction="in" />
+</method>
+
+<!--
+#endif
+-->
+
+<!-- method: ReadLocalOobDataReq
+#ifdef INC_ReadLocalOobDataReq
+-->
+<method name="ReadLocalOobDataReq">
+	<arg name="phandle" type="q" direction="in" /> 
+</method>
+
+<!--
+#endif
+-->
+
+<!-- method: DebugModeReq
+#ifdef INC_DebugModeReq
+-->
+<!-- Function to build and send a BT_SC_DEBUG_MODE_REQ message to the SC messagequeue. -->
+<method name="DebugModeReq">
+	<arg name="phandle" type="q" direction="in" />
+	<arg name="enable" type="b" direction="in" />
+</method>
+
+<!--
+#endif
+-->
+
+<!-- method: ConfigReq
+#ifdef INC_ConfigReq
+-->
+<!-- Function to build and send a BT_SC_CONFIG_REQ message to the SC messagequeue. -->
+<method name="ConfigReq">
+	<arg name="configMask" type="u" direction="in" /> <!-- BtScConfigMask -->
+</method>
+
+<!--
+#endif
+-->
+
+<!-- method: AcceptBondReq
+#ifdef INC_AcceptBondReq
+-->
+<!-- Function to build and send a BT_SC_ACCEPT_BOND_REQ message to the SC messagequeue. -->
+<method name="AcceptBondReq">
+	<arg name="phandle" type="q" direction="in" />
+	<arg name="time" type="u" direction="in" /> <!-- time in msec where the device shall be discoverable from the time the request is handled  -->
+</method>
+
+<!--
+#endif
+-->
+
+<!-- method: CancelAcceptBondReq
+#ifdef INC_CancelAcceptBondReq
+-->
+<!-- Function to build and send a BT_SC_CANCEL_ACCEPT_BOND_REQ message to the SC message queue. -->
+<method name="CancelAcceptBondReq">
+	<arg name="phandle" type="q" direction="in" />
+</method>
+<!--
+#endif
+-->
+</interface>
+</node>
+
