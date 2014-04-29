@@ -51,7 +51,7 @@ class SdClient: public sd_proxy, public DBus::IntrospectableProxy, public DBus::
 				name = i->second.reader().get_string();
 			std::time_t t = std::time(0);
 			std::cout << "| " << t << " | " << deviceAddr <<
-				     " | \"" << "\033[32m" << name << "\033[37m" | " <<
+				     " | " << "\033[32m" << name << "\033[37m" << " | " <<
 				     rssi << " | " << std::endl;
 			return;
 		}
@@ -70,7 +70,7 @@ class SdClient: public sd_proxy, public DBus::IntrospectableProxy, public DBus::
 				}
 				case BT_EIR_DATA_TYPE_COMPLETE_128_BIT_UUID:
 				{
-					std::cout << "  LIST OF SERVICES:" << std::endl;
+					std::cout << "  \033[32mLIST OF SERVICES:\033[37m" << std::endl;
 					std::vector< std::vector< uint8_t > > uuids;
 					::DBus::MessageIter ri = i->second.reader();
 					ri >> uuids;
@@ -90,7 +90,7 @@ class SdClient: public sd_proxy, public DBus::IntrospectableProxy, public DBus::
 				{
 					if (i->first == BT_EIR_DATA_TYPE_DEVICE_ID)
 						//std::cout << "  DEVICE ID DATA: " << std::endl;
-						std::cout << "  DEVICE ID DATA: ";
+						std::cout << "  \033[32mDEVICE ID DATA:\033[37m ";
 					else if (i->first == BT_EIR_DATA_TYPE_MANUFACTURER_SPECIFIC)
 						//std::cout << "  \033[32mMANUFACTURER DATA:\033[37m " << std::endl;
 						std::cout << "  \033[32mMANUFACTURER DATA:\033[37m " ;

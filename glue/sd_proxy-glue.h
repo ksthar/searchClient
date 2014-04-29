@@ -100,7 +100,7 @@ private:
         ri >> resultSupplier;
         CloseSearchInd(resultCode, resultSupplier);
     }
-};  /* class sd_proxy */
+};
 
 } } } } 
 #endif //__dbusxx__glue_sd_proxy_glue_h__PROXY_MARSHAL_H
