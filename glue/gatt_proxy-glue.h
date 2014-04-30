@@ -24,6 +24,7 @@ public:
     {
         connect_signal(gatt_proxy, CentralCfm, _CentralCfm_stub);
         connect_signal(gatt_proxy, RegisterCfm, _RegisterCfm_stub);
+        connect_signal(gatt_proxy, UnregisterCfm, _UnregisterCfm_stub);
     }
 
 public:
@@ -57,6 +58,16 @@ public:
         ::DBus::Message ret = invoke_method (call);
     }
 
+    void UnregisterReq(const uint32_t& gattId)
+    {
+        ::DBus::CallMessage call;
+        ::DBus::MessageIter wi = call.writer();
+
+        wi << gattId;
+        call.member("UnregisterReq");
+        ::DBus::Message ret = invoke_method (call);
+    }
+
 
 public:
 
@@ -64,6 +75,7 @@ public:
      */
     virtual void CentralCfm(const uint32_t& gattId, const uint32_t& btConnId, const uint16_t& resultCode, const uint16_t& resultSupplier) = 0;
     virtual void RegisterCfm(const uint32_t& gattId, const uint16_t& resultCode, const uint16_t& resultSupplier, const uint16_t& context) = 0;
+    virtual void UnregisterCfm(const uint32_t& gattId, const uint16_t& resultCode, const uint16_t& resultSupplier) = 0;
 
 private:
 
@@ -96,6 +108,18 @@ private:
         uint16_t context;
         ri >> context;
         RegisterCfm(gattId, resultCode, resultSupplier, context);
+    }
+    void _UnregisterCfm_stub(const ::DBus::SignalMessage &sig)
+    {
+        ::DBus::MessageIter ri = sig.reader();
+
+        uint32_t gattId;
+        ri >> gattId;
+        uint16_t resultCode;
+        ri >> resultCode;
+        uint16_t resultSupplier;
+        ri >> resultSupplier;
+        UnregisterCfm(gattId, resultCode, resultSupplier);
     }
 };
 

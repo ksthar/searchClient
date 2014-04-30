@@ -553,7 +553,9 @@ glue/gatt_proxy-glue.h: ./xml/gatt.xml
 	mkdir -p glue
 	cpp -P \
 		-DINC_RegisterReq \
+		-DINC_UnregisterReq \
 		-DINC_RegisterCfm \
+		-DINC_UnregisterCfm \
 		-DINC_CentralReq \
 		-DINC_CentralCfm \
 		$< > ./xml/gatt_proxy.xml
